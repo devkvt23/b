@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>.blog</title>
     <style>
+        /* Base Styles and Reset */
         * {
             margin: 0;
             padding: 0;
@@ -19,17 +20,20 @@
             transition: all 0.3s ease;
         }
 
+        /* Dark Mode Styles */
         body.dark {
             color: #e4e4e7;
             background: #0a0a0a;
         }
 
+        /* Container for content */
         .container {
             max-width: 800px;
             margin: 0 auto;
             padding: 2rem 1rem;
         }
 
+        /* Header Section */
         header {
             text-align: center;
             margin-bottom: 4rem;
@@ -58,6 +62,7 @@
             color: #9ca3af;
         }
 
+        /* Controls Section (Input, Buttons) */
         .controls {
             display: flex;
             justify-content: center;
@@ -102,6 +107,7 @@
             to { transform: rotate(360deg); }
         }
 
+        /* New Post Notification */
         .new-post-notification {
             position: fixed;
             top: 5rem;
@@ -121,6 +127,7 @@
             transform: translateX(0);
         }
 
+        /* Input Field */
         .github-input {
             padding: 0.75rem 1rem;
             border: 1px solid #d1d5db;
@@ -147,6 +154,7 @@
             box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
         }
 
+        /* Buttons */
         .btn {
             padding: 0.75rem 1.5rem;
             background: #000;
@@ -175,6 +183,7 @@
             background: #e5e5e5;
         }
 
+        /* Theme Toggle Button */
         .theme-toggle {
             position: fixed;
             top: 2rem;
@@ -199,6 +208,7 @@
             transform: scale(1.1);
         }
 
+        /* Blog Posts Grid */
         .blog-posts {
             display: grid;
             gap: 2rem;
@@ -227,6 +237,7 @@
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
         }
 
+        /* Blog Post Elements */
         .post-title {
             font-size: 1.5rem;
             font-weight: 600;
@@ -257,6 +268,7 @@
             color: #d1d5db;
         }
 
+        /* Loading and Error Messages */
         .loading {
             text-align: center;
             color: #6b7280;
@@ -283,8 +295,9 @@
             color: #f87171;
         }
 
+        /* Modal Styles */
         .modal {
-            display: none;
+            display: none; /* Hidden by default */
             position: fixed;
             top: 0;
             left: 0;
@@ -325,6 +338,11 @@
             align-items: center;
             justify-content: center;
             transition: all 0.2s ease;
+            color: #333; /* Ensure close button is visible in light mode */
+        }
+
+        body.dark .modal-close {
+            color: #e4e4e7; /* Ensure close button is visible in dark mode */
         }
 
         .modal-close:hover {
@@ -335,6 +353,7 @@
             background: #18181b;
         }
 
+        /* Markdown Content Styling within Modal */
         .markdown-content h1,
         .markdown-content h2,
         .markdown-content h3,
@@ -343,16 +362,37 @@
         .markdown-content h6 {
             margin: 1.5rem 0 1rem 0;
             line-height: 1.3;
+            color: #111827; /* Default color for headers */
+        }
+
+        body.dark .markdown-content h1,
+        body.dark .markdown-content h2,
+        body.dark .markdown-content h3,
+        body.dark .markdown-content h4,
+        body.dark .markdown-content h5,
+        body.dark .markdown-content h6 {
+            color: #f9fafb; /* Dark mode color for headers */
         }
 
         .markdown-content p {
             margin: 1rem 0;
+            color: #4b5563; /* Default color for paragraphs */
+        }
+
+        body.dark .markdown-content p {
+            color: #d1d5db; /* Dark mode color for paragraphs */
         }
 
         .markdown-content ul,
         .markdown-content ol {
             margin: 1rem 0;
             padding-left: 2rem;
+            color: #4b5563; /* Default color for lists */
+        }
+
+        body.dark .markdown-content ul,
+        body.dark .markdown-content ol {
+            color: #d1d5db; /* Dark mode color for lists */
         }
 
         .markdown-content code {
@@ -360,10 +400,12 @@
             padding: 0.125rem 0.25rem;
             border-radius: 0.25rem;
             font-size: 0.875rem;
+            color: #e96900; /* Distinct color for inline code */
         }
 
         body.dark .markdown-content code {
             background: #18181b;
+            color: #ff9800; /* Dark mode color for inline code */
         }
 
         .markdown-content pre {
@@ -372,10 +414,12 @@
             border-radius: 0.5rem;
             overflow-x: auto;
             margin: 1rem 0;
+            color: #333; /* Default color for code blocks */
         }
 
         body.dark .markdown-content pre {
             background: #0f0f0f;
+            color: #e4e4e7; /* Dark mode color for code blocks */
         }
 
         .markdown-content blockquote {
@@ -390,6 +434,7 @@
             color: #9ca3af;
         }
 
+        /* Responsive Design */
         @media (max-width: 640px) {
             .container {
                 padding: 1rem;
@@ -432,13 +477,6 @@
     <div class="container">
         <header>
             <h1>.blog</h1>
-            <a href="https://x.com/devkvt2" target="_blank" rel="noopener" title="Follow on X" style="position: fixed; top: 2rem; left: 2rem; z-index: 999;">
-                <svg width="28" height="28" viewBox="0 0 1200 1227" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="1200" height="1227" rx="240" fill="black"/>
-                    <path d="M857 320H1012L667 701L1068 1200H803L570 917L307 1200H152L517 786L132 320H407L617 579L857 320ZM813 1120H893L393 400H313L813 1120Z" fill="white"/>
-                </svg>
-            </a>
-
             
             <div class="controls">
                 <input 
@@ -467,7 +505,7 @@
             <div id="error" class="error" style="display: none;"></div>
             
             <div id="newPostNotification" class="new-post-notification" onclick="dismissNotification()">
-               posts available! click to refresh.
+                posts available! click to refresh.
             </div>
             
             <div id="blogPosts" class="blog-posts"></div>
