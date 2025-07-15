@@ -5,466 +5,580 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>.blog</title>
     <style>
-        /* Base Styles and Reset */
+        /*
+         * Global Styles and CSS Reset
+         * Applies to all elements to ensure consistent rendering across browsers.
+         */
         * {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height. */
         }
 
+        /*
+         * Body Styling
+         * Defines fundamental typography, color scheme, and background for the entire document.
+         * Includes a smooth transition for theme changes.
+         */
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: #fff;
-            transition: all 0.3s ease;
+            line-height: 1.6; /* Sets line height for readability. */
+            color: #333; /* Default text color for light mode. */
+            background: #fff; /* Default background color for light mode. */
+            transition: all 0.3s ease; /* Smooth transition for property changes (e.g., theme switch). */
         }
 
-        /* Dark Mode Styles */
+        /*
+         * Dark Mode Styling for Body
+         * Overrides default body styles when the 'dark' class is applied, providing a dark theme.
+         */
         body.dark {
-            color: #e4e4e7;
-            background: #0a0a0a;
+            color: #e4e4e7; /* Text color in dark mode. */
+            background: #0a0a0a; /* Background color in dark mode. */
         }
 
-        /* Container for content */
+        /*
+         * Container Layout
+         * Centers content horizontally and provides internal padding for consistent spacing.
+         */
         .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
+            max-width: 800px; /* Maximum width to prevent content from stretching too wide on large screens. */
+            margin: 0 auto; /* Centers the container horizontally. */
+            padding: 2rem 1rem; /* Vertical and horizontal padding. */
         }
 
-        /* Header Section */
+        /*
+         * Header Section Styling
+         * Defines the visual presentation of the page header, including text alignment and bottom border.
+         */
         header {
-            text-align: center;
-            margin-bottom: 4rem;
-            border-bottom: 1px solid #e5e5e5;
-            padding-bottom: 2rem;
+            text-align: center; /* Centers header content. */
+            margin-bottom: 4rem; /* Space below the header. */
+            border-bottom: 1px solid #e5e5e5; /* Separator line. */
+            padding-bottom: 2rem; /* Padding before the separator. */
         }
 
+        /* Dark Mode Header Border */
         body.dark header {
-            border-bottom-color: #27272a;
+            border-bottom-color: #27272a; /* Darker border in dark mode. */
         }
 
+        /*
+         * Main Title (H1) Styling
+         * Defines the appearance of the primary heading on the page.
+         */
         h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            letter-spacing: -0.025em;
+            font-size: 2.5rem; /* Large font size for prominence. */
+            font-weight: 700; /* Bold font weight. */
+            margin-bottom: 0.5rem; /* Space below the title. */
+            letter-spacing: -0.025em; /* Slight letter spacing adjustment for aesthetic. */
         }
 
+        /*
+         * Subtitle Styling
+         * Styles for a secondary descriptive text, providing additional context.
+         */
         .subtitle {
-            color: #6b7280;
-            font-size: 1.125rem;
-            margin-bottom: 2rem;
+            color: #6b7280; /* Subdued text color. */
+            font-size: 1.125rem; /* Font size for subtitle. */
+            margin-bottom: 2rem; /* Space below the subtitle. */
         }
 
+        /* Dark Mode Subtitle Color */
         body.dark .subtitle {
-            color: #9ca3af;
+            color: #9ca3af; /* Lighter color in dark mode. */
         }
 
-        /* Controls Section (Input, Buttons) */
+        /*
+         * Controls Section Styling
+         * Arranges interactive elements (input, buttons) horizontally with spacing.
+         */
         .controls {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
+            display: flex; /* Uses flexbox for alignment. */
+            justify-content: center; /* Centers items horizontally. */
+            align-items: center; /* Centers items vertically. */
+            gap: 1rem; /* Space between items. */
+            margin-bottom: 2rem; /* Space below the controls. */
+            flex-wrap: wrap; /* Allows items to wrap to the next line on smaller screens. */
         }
 
+        /*
+         * Last Update Information Display
+         * Styles for a small informational block indicating the last content update time.
+         */
         .last-update {
-            text-align: center;
-            color: #6b7280;
-            font-size: 0.875rem;
-            margin-bottom: 2rem;
-            padding: 0.5rem;
-            background: #f8f9fa;
-            border-radius: 0.5rem;
-            border-left: 4px solid #10b981;
+            text-align: center; /* Centers the text. */
+            color: #6b7280; /* Subdued text color. */
+            font-size: 0.875rem; /* Smaller font size. */
+            margin-bottom: 2rem; /* Space below. */
+            padding: 0.5rem; /* Internal padding. */
+            background: #f8f9fa; /* Light background. */
+            border-radius: 0.5rem; /* Rounded corners. */
+            border-left: 4px solid #10b981; /* Left accent border. */
         }
 
+        /* Dark Mode Last Update Background and Color */
         body.dark .last-update {
-            color: #9ca3af;
-            background: #0f0f0f;
+            color: #9ca3af; /* Lighter text in dark mode. */
+            background: #0f0f0f; /* Dark background. */
         }
 
+        /*
+         * Auto-Refresh Active State
+         * Visual indicator for when auto-refresh is enabled.
+         */
         .auto-refresh-active {
-            background: #10b981 !important;
-            color: white !important;
+            background: #10b981 !important; /* Green background to highlight active state. */
+            color: white !important; /* White text for contrast. */
         }
 
-        body.dark .auto-refresh-active {
-            background: #10b981 !important;
-            color: white !important;
-        }
-
+        /*
+         * Refresh Icon Animation
+         * Defines a spinning animation for the refresh icon.
+         */
         .refresh-icon-spin {
-            animation: spin 1s linear infinite;
+            animation: spin 1s linear infinite; /* Applies the spin keyframe animation. */
         }
 
+        /* Keyframe for Spin Animation */
         @keyframes spin {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
 
-        /* New Post Notification */
+        /*
+         * New Post Notification
+         * Styles for a transient notification indicating new content is available.
+         */
         .new-post-notification {
-            position: fixed;
+            position: fixed; /* Fixed position relative to the viewport. */
             top: 5rem;
             right: 2rem;
-            background: #10b981;
-            color: white;
-            padding: 1rem 1.5rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            transform: translateX(400px);
-            transition: transform 0.3s ease;
-            z-index: 999;
-            cursor: pointer;
+            background: #10b981; /* Green background. */
+            color: white; /* White text. */
+            padding: 1rem 1.5rem; /* Internal padding. */
+            border-radius: 0.5rem; /* Rounded corners. */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* Subtle shadow. */
+            transform: translateX(400px); /* Initially off-screen to the right. */
+            transition: transform 0.3s ease; /* Smooth slide-in/out animation. */
+            z-index: 999; /* Ensures it appears above other content. */
+            cursor: pointer; /* Indicates it's clickable. */
         }
 
+        /* Show Notification State */
         .new-post-notification.show {
-            transform: translateX(0);
+            transform: translateX(0); /* Slides into view. */
         }
 
-        /* Input Field */
+        /*
+         * GitHub Repository Input Field
+         * Styles for the text input where the user enters the GitHub repository.
+         */
         .github-input {
-            padding: 0.75rem 1rem;
-            border: 1px solid #d1d5db;
-            border-radius: 0.5rem;
-            font-size: 0.875rem;
-            width: 300px;
-            outline: none;
-            transition: all 0.2s ease;
+            padding: 0.75rem 1rem; /* Internal padding. */
+            border: 1px solid #d1d5db; /* Light border. */
+            border-radius: 0.5rem; /* Rounded corners. */
+            font-size: 0.875rem; /* Font size. */
+            width: 300px; /* Fixed width. */
+            outline: none; /* Removes default focus outline. */
+            transition: all 0.2s ease; /* Smooth transition for focus states. */
         }
 
+        /* Focus State for Input */
         .github-input:focus {
-            border-color: #000;
-            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+            border-color: #000; /* Darker border on focus. */
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1); /* Subtle shadow on focus. */
         }
 
+        /* Dark Mode Input Field */
         body.dark .github-input {
-            background: #18181b;
-            border-color: #3f3f46;
-            color: #e4e4e7;
+            background: #18181b; /* Dark background. */
+            border-color: #3f3f46; /* Darker border. */
+            color: #e4e4e7; /* Lighter text. */
         }
 
+        /* Dark Mode Input Focus State */
         body.dark .github-input:focus {
-            border-color: #fff;
-            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+            border-color: #fff; /* White border on focus. */
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1); /* Lighter shadow on focus. */
         }
 
-        /* Buttons */
+        /*
+         * General Button Styling
+         * Applies to all interactive buttons for a consistent look.
+         */
         .btn {
-            padding: 0.75rem 1.5rem;
-            background: #000;
-            color: #fff;
-            border: none;
-            border-radius: 0.5rem;
-            cursor: pointer;
-            font-size: 0.875rem;
-            font-weight: 500;
-            transition: all 0.2s ease;
-            text-decoration: none;
-            display: inline-block;
+            padding: 0.75rem 1.5rem; /* Internal padding. */
+            background: #000; /* Black background. */
+            color: #fff; /* White text. */
+            border: none; /* No border. */
+            border-radius: 0.5rem; /* Rounded corners. */
+            cursor: pointer; /* Indicates clickable element. */
+            font-size: 0.875rem; /* Font size. */
+            font-weight: 500; /* Medium font weight. */
+            transition: all 0.2s ease; /* Smooth hover effects. */
+            text-decoration: none; /* Removes underline for anchor-styled buttons. */
+            display: inline-block; /* Allows padding and vertical alignment. */
         }
 
+        /* Button Hover State */
         .btn:hover {
-            background: #374151;
-            transform: translateY(-1px);
+            background: #374151; /* Darker background on hover. */
+            transform: translateY(-1px); /* Slight lift effect on hover. */
         }
 
+        /* Dark Mode Button Styling */
         body.dark .btn {
-            background: #fff;
-            color: #000;
+            background: #fff; /* White background in dark mode. */
+            color: #000; /* Black text in dark mode. */
         }
 
+        /* Dark Mode Button Hover State */
         body.dark .btn:hover {
-            background: #e5e5e5;
+            background: #e5e5e5; /* Lighter background on hover in dark mode. */
         }
 
-        /* Theme Toggle Button */
+        /*
+         * Theme Toggle Button
+         * Styles for the button that switches between light and dark themes.
+         */
         .theme-toggle {
-            position: fixed;
+            position: fixed; /* Fixed position relative to the viewport. */
             top: 2rem;
             right: 2rem;
-            background: none;
-            border: 1px solid #d1d5db;
-            border-radius: 50%;
+            background: none; /* Transparent background. */
+            border: 1px solid #d1d5db; /* Light border. */
+            border-radius: 50%; /* Makes it a circle. */
             width: 44px;
             height: 44px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
+            cursor: pointer; /* Indicates clickable element. */
+            display: flex; /* Uses flexbox to center icon. */
+            align-items: center; /* Centers vertically. */
+            justify-content: center; /* Centers horizontally. */
+            transition: all 0.2s ease; /* Smooth hover effects. */
         }
 
+        /* Dark Mode Theme Toggle Border */
         body.dark .theme-toggle {
-            border-color: #3f3f46;
+            border-color: #3f3f46; /* Darker border in dark mode. */
         }
 
+        /* Theme Toggle Hover State */
         .theme-toggle:hover {
-            transform: scale(1.1);
+            transform: scale(1.1); /* Slightly enlarges on hover. */
         }
 
-        /* Blog Posts Grid */
+        /*
+         * Blog Posts Grid Layout
+         * Arranges individual blog posts in a grid with consistent spacing.
+         */
         .blog-posts {
-            display: grid;
-            gap: 2rem;
+            display: grid; /* Uses CSS Grid for layout. */
+            gap: 2rem; /* Space between grid items (blog posts). */
         }
 
+        /*
+         * Individual Blog Post Card
+         * Styles for each blog post entry, including borders, padding, and hover effects.
+         */
         .blog-post {
-            border: 1px solid #e5e5e5;
-            border-radius: 1rem;
-            padding: 2rem;
-            transition: all 0.3s ease;
-            cursor: pointer;
+            border: 1px solid #e5e5e5; /* Light border. */
+            border-radius: 1rem; /* Rounded corners. */
+            padding: 2rem; /* Internal padding. */
+            transition: all 0.3s ease; /* Smooth hover effects. */
+            cursor: pointer; /* Indicates clickable element. */
         }
 
+        /* Blog Post Hover State */
         .blog-post:hover {
-            border-color: #d1d5db;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-color: #d1d5db; /* Darker border on hover. */
+            transform: translateY(-2px); /* Slight lift effect on hover. */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* Subtle shadow on hover. */
         }
 
+        /* Dark Mode Blog Post Card */
         body.dark .blog-post {
-            border-color: #27272a;
+            border-color: #27272a; /* Darker border in dark mode. */
         }
 
+        /* Dark Mode Blog Post Hover State */
         body.dark .blog-post:hover {
-            border-color: #3f3f46;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            border-color: #3f3f46; /* Even darker border on hover. */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); /* More pronounced shadow in dark mode. */
         }
 
-        /* Blog Post Elements */
+        /*
+         * Blog Post Title within Card
+         */
         .post-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: #111827;
+            font-size: 1.5rem; /* Font size for post titles. */
+            font-weight: 600; /* Semi-bold. */
+            margin-bottom: 0.5rem; /* Space below title. */
+            color: #111827; /* Dark text color. */
         }
 
+        /* Dark Mode Post Title */
         body.dark .post-title {
-            color: #f9fafb;
+            color: #f9fafb; /* Light text color in dark mode. */
         }
 
+        /*
+         * Blog Post Date
+         */
         .post-date {
-            color: #6b7280;
-            font-size: 0.875rem;
-            margin-bottom: 1rem;
+            color: #6b7280; /* Subdued text color. */
+            font-size: 0.875rem; /* Smaller font size. */
+            margin-bottom: 1rem; /* Space below date. */
         }
 
+        /* Dark Mode Post Date */
         body.dark .post-date {
-            color: #9ca3af;
+            color: #9ca3af; /* Lighter text color in dark mode. */
         }
 
+        /*
+         * Blog Post Excerpt
+         */
         .post-excerpt {
-            color: #4b5563;
-            line-height: 1.6;
+            color: #4b5563; /* Default text color. */
+            line-height: 1.6; /* Line height for readability. */
         }
 
+        /* Dark Mode Post Excerpt */
         body.dark .post-excerpt {
-            color: #d1d5db;
+            color: #d1d5db; /* Lighter text color in dark mode. */
         }
 
-        /* Loading and Error Messages */
+        /*
+         * Loading Message Styling
+         */
         .loading {
-            text-align: center;
-            color: #6b7280;
-            font-style: italic;
-            margin: 2rem 0;
+            text-align: center; /* Centers the text. */
+            color: #6b7280; /* Subdued text color. */
+            font-style: italic; /* Italic font. */
+            margin: 2rem 0; /* Vertical margin. */
         }
 
+        /* Dark Mode Loading Message */
         body.dark .loading {
-            color: #9ca3af;
+            color: #9ca3af; /* Lighter text color in dark mode. */
         }
 
+        /*
+         * Error Message Styling
+         */
         .error {
-            background: #fef2f2;
-            border: 1px solid #fecaca;
-            color: #dc2626;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            margin: 1rem 0;
+            background: #fef2f2; /* Light red background. */
+            border: 1px solid #fecaca; /* Red border. */
+            color: #dc2626; /* Dark red text. */
+            padding: 1rem; /* Internal padding. */
+            border-radius: 0.5rem; /* Rounded corners. */
+            margin: 1rem 0; /* Vertical margin. */
         }
 
+        /* Dark Mode Error Message */
         body.dark .error {
-            background: #1f1f23;
-            border-color: #ef4444;
-            color: #f87171;
+            background: #1f1f23; /* Darker background. */
+            border-color: #ef4444; /* Brighter red border. */
+            color: #f87171; /* Lighter red text. */
         }
 
-        /* Modal Styles */
+        /*
+         * Modal Overlay Styling
+         * Covers the entire screen when a blog post is opened.
+         */
         .modal {
-            display: none; /* Hidden by default */
-            position: fixed;
+            display: none; /* Hidden by default. */
+            position: fixed; /* Fixed position relative to the viewport. */
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
-            padding: 2rem;
-            overflow-y: auto;
+            background: rgba(0, 0, 0, 0.8); /* Semi-transparent black overlay. */
+            z-index: 1000; /* Ensures it appears on top. */
+            padding: 2rem; /* Internal padding. */
+            overflow-y: auto; /* Allows vertical scrolling if content overflows. */
         }
 
+        /*
+         * Modal Content Area
+         * The actual container for the displayed blog post content within the modal.
+         */
         .modal-content {
-            max-width: 800px;
-            margin: 0 auto;
-            background: #fff;
-            border-radius: 1rem;
-            padding: 2rem;
-            position: relative;
+            max-width: 800px; /* Maximum width. */
+            margin: 0 auto; /* Centers horizontally. */
+            background: #fff; /* White background. */
+            border-radius: 1rem; /* Rounded corners. */
+            padding: 2rem; /* Internal padding. */
+            position: relative; /* Needed for positioning the close button. */
         }
 
+        /* Dark Mode Modal Content */
         body.dark .modal-content {
-            background: #0a0a0a;
-            border: 1px solid #27272a;
+            background: #0a0a0a; /* Dark background. */
+            border: 1px solid #27272a; /* Dark border. */
         }
 
+        /*
+         * Modal Close Button Styling
+         */
         .modal-close {
-            position: absolute;
+            position: absolute; /* Absolute position within the modal content. */
             top: 1rem;
             right: 1rem;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
+            background: none; /* Transparent background. */
+            border: none; /* No border. */
+            font-size: 1.5rem; /* Large font size for 'x'. */
+            cursor: pointer; /* Indicates clickable element. */
             width: 40px;
             height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-            color: #333; /* Ensure close button is visible in light mode */
+            border-radius: 50%; /* Makes it a circle. */
+            display: flex; /* Uses flexbox to center 'x'. */
+            align-items: center; /* Centers vertically. */
+            justify-content: center; /* Centers horizontally. */
+            transition: all 0.2s ease; /* Smooth hover effects. */
+            color: #333; /* Default color for light mode. */
         }
 
+        /* Dark Mode Modal Close Button */
         body.dark .modal-close {
-            color: #e4e4e7; /* Ensure close button is visible in dark mode */
+            color: #e4e4e7; /* Lighter color in dark mode. */
         }
 
+        /* Modal Close Button Hover State */
         .modal-close:hover {
-            background: #f3f4f6;
+            background: #f3f4f6; /* Light background on hover. */
         }
 
+        /* Dark Mode Modal Close Button Hover State */
         body.dark .modal-close:hover {
-            background: #18181b;
+            background: #18181b; /* Darker background on hover. */
         }
 
-        /* Markdown Content Styling within Modal */
+        /*
+         * Markdown Content Styling (within Modal and general)
+         * Provides basic styling for rendered markdown elements to improve readability.
+         */
         .markdown-content h1,
         .markdown-content h2,
         .markdown-content h3,
         .markdown-content h4,
         .markdown-content h5,
         .markdown-content h6 {
-            margin: 1.5rem 0 1rem 0;
-            line-height: 1.3;
-            color: #111827; /* Default color for headers */
+            margin: 1.5rem 0 1rem 0; /* Vertical margins for headings. */
+            line-height: 1.3; /* Line height for headings. */
+            color: #111827; /* Default color for headers. */
         }
 
+        /* Dark Mode Markdown Headers */
         body.dark .markdown-content h1,
         body.dark .markdown-content h2,
         body.dark .markdown-content h3,
         body.dark .markdown-content h4,
         body.dark .markdown-content h5,
         body.dark .markdown-content h6 {
-            color: #f9fafb; /* Dark mode color for headers */
+            color: #f9fafb; /* Dark mode color for headers. */
         }
 
         .markdown-content p {
-            margin: 1rem 0;
-            color: #4b5563; /* Default color for paragraphs */
+            margin: 1rem 0; /* Vertical margins for paragraphs. */
+            color: #4b5563; /* Default color for paragraphs. */
         }
 
+        /* Dark Mode Markdown Paragraphs */
         body.dark .markdown-content p {
-            color: #d1d5db; /* Dark mode color for paragraphs */
+            color: #d1d5db; /* Dark mode color for paragraphs. */
         }
 
         .markdown-content ul,
         .markdown-content ol {
-            margin: 1rem 0;
-            padding-left: 2rem;
-            color: #4b5563; /* Default color for lists */
+            margin: 1rem 0; /* Vertical margins for lists. */
+            padding-left: 2rem; /* Indentation for list items. */
+            color: #4b5563; /* Default color for lists. */
         }
 
+        /* Dark Mode Markdown Lists */
         body.dark .markdown-content ul,
         body.dark .markdown-content ol {
-            color: #d1d5db; /* Dark mode color for lists */
+            color: #d1d5db; /* Dark mode color for lists. */
         }
 
         .markdown-content code {
-            background: #f3f4f6;
-            padding: 0.125rem 0.25rem;
-            border-radius: 0.25rem;
-            font-size: 0.875rem;
-            color: #e96900; /* Distinct color for inline code */
+            background: #f3f4f6; /* Light background for inline code. */
+            padding: 0.125rem 0.25rem; /* Small padding. */
+            border-radius: 0.25rem; /* Slightly rounded corners. */
+            font-size: 0.875rem; /* Smaller font size. */
+            color: #e96900; /* Distinct color for inline code. */
         }
 
+        /* Dark Mode Markdown Inline Code */
         body.dark .markdown-content code {
-            background: #18181b;
-            color: #ff9800; /* Dark mode color for inline code */
+            background: #18181b; /* Dark background. */
+            color: #ff9800; /* Brighter color. */
         }
 
         .markdown-content pre {
-            background: #f8f9fa;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            overflow-x: auto;
-            margin: 1rem 0;
-            color: #333; /* Default color for code blocks */
+            background: #f8f9fa; /* Light background for code blocks. */
+            padding: 1rem; /* Internal padding. */
+            border-radius: 0.5rem; /* Rounded corners. */
+            overflow-x: auto; /* Enables horizontal scrolling for long lines. */
+            margin: 1rem 0; /* Vertical margins. */
+            color: #333; /* Default color for code blocks. */
         }
 
+        /* Dark Mode Markdown Code Blocks */
         body.dark .markdown-content pre {
-            background: #0f0f0f;
-            color: #e4e4e7; /* Dark mode color for code blocks */
+            background: #0f0f0f; /* Dark background. */
+            color: #e4e4e7; /* Lighter text. */
         }
 
         .markdown-content blockquote {
-            border-left: 4px solid #e5e5e5;
-            padding-left: 1rem;
-            margin: 1rem 0;
-            color: #6b7280;
+            border-left: 4px solid #e5e5e5; /* Left border to visually distinguish. */
+            padding-left: 1rem; /* Space between border and text. */
+            margin: 1rem 0; /* Vertical margins. */
+            color: #6b7280; /* Subdued text color. */
         }
 
+        /* Dark Mode Markdown Blockquotes */
         body.dark .markdown-content blockquote {
-            border-left-color: #3f3f46;
-            color: #9ca3af;
+            border-left-color: #3f3f46; /* Darker border. */
+            color: #9ca3af; /* Lighter text. */
         }
 
-        /* Responsive Design */
+        /*
+         * Responsive Design Adjustments
+         * Adapts layout for smaller screens (e.g., mobile devices).
+         */
         @media (max-width: 640px) {
             .container {
-                padding: 1rem;
+                padding: 1rem; /* Reduced padding for smaller screens. */
             }
 
             h1 {
-                font-size: 2rem;
+                font-size: 2rem; /* Smaller font size for header on mobile. */
             }
 
             .controls {
-                flex-direction: column;
-                align-items: center;
+                flex-direction: column; /* Stacks controls vertically. */
+                align-items: center; /* Centers stacked items. */
             }
 
             .github-input {
-                width: 100%;
-                max-width: 300px;
+                width: 100%; /* Full width for input. */
+                max-width: 300px; /* Limits maximum width even if 100%. */
             }
 
             .theme-toggle {
-                top: 1rem;
+                top: 1rem; /* Repositions toggle button. */
                 right: 1rem;
             }
 
             .modal {
-                padding: 1rem;
+                padding: 1rem; /* Reduced modal padding. */
             }
 
             .modal-content {
-                padding: 1rem;
+                padding: 1rem; /* Reduced modal content padding. */
             }
         }
     </style>
@@ -520,368 +634,480 @@
     </div>
 
     <script>
-        let blogData = [];
-        let currentRepo = '';
-        let autoRefreshInterval = null;
-        let lastKnownSha = '';
+        // Global variables to manage blog state and intervals.
+        let blogData = []; // Stores an array of parsed blog post objects.
+        let currentRepo = ''; // Stores the currently loaded GitHub repository string (e.g., 'username/repo').
+        let autoRefreshInterval = null; // Holds the setInterval ID for auto-refresh, allowing it to be cleared.
+        let lastKnownSha = ''; // Stores the SHA of the last commit fetched from GitHub, used to detect new commits.
         
-        // Auto-loading configuration
-        const AUTO_REFRESH_INTERVAL = 30000; // 30 seconds
-        const DEFAULT_REPO = 'devkvt23/b';
+        // Configuration Constants
+        const AUTO_REFRESH_INTERVAL = 30000; // Interval for checking updates in milliseconds (30 seconds).
+        const DEFAULT_REPO = 'devkvt23/b'; // The default GitHub repository to load on initial page access.
         
-        // Theme management
+        /**
+         * Toggles between light and dark themes.
+         * Manipulates the 'dark' class on the <body> element and updates the theme icon.
+         */
         function toggleTheme() {
-            const body = document.body;
-            const themeIcon = document.getElementById('theme-icon');
+            const bodyElement = document.body;
+            const themeIconElement = document.getElementById('theme-icon');
             
-            body.classList.toggle('dark');
-            themeIcon.textContent = body.classList.contains('dark') ? '☀️' : '🌙';
+            bodyElement.classList.toggle('dark');
+            // Update the icon based on the current theme.
+            themeIconElement.textContent = bodyElement.classList.contains('dark') ? '☀️' : '🌙';
             
-            // Store theme preference in memory only
-            const theme = body.classList.contains('dark') ? 'dark' : 'light';
-            window.currentTheme = theme;
+            // Store the current theme preference in a global window property for persistence across minor reloads.
+            window.currentTheme = bodyElement.classList.contains('dark') ? 'dark' : 'light';
         }
 
-        // Load saved theme
+        /**
+         * Loads the user's last selected theme preference on page load.
+         * Applies the 'dark' class to the body if the preference is 'dark'.
+         */
         function loadTheme() {
+            // Checks if a theme preference was previously set in the window's memory.
             if (window.currentTheme === 'dark') {
                 document.body.classList.add('dark');
-                document.getElementById('theme-icon').textContent = '☀️';
+                document.getElementById('theme-icon').textContent = '☀️'; // Set icon to sun for dark mode.
             }
         }
 
-        // Auto-refresh functionality
+        /**
+         * Toggles the auto-refresh functionality for the blog posts.
+         * Starts or stops the interval for checking updates and updates the button's text and style.
+         */
         function toggleAutoRefresh() {
-            const btn = document.getElementById('autoRefreshBtn');
-            const icon = document.getElementById('refreshIcon');
+            const autoRefreshButton = document.getElementById('autoRefreshBtn');
+            const refreshIcon = document.getElementById('refreshIcon');
+            const lastUpdateDisplay = document.getElementById('lastUpdate');
             
             if (autoRefreshInterval) {
-                // Stop auto-refresh
+                // If auto-refresh is active, stop it.
                 clearInterval(autoRefreshInterval);
-                autoRefreshInterval = null;
-                btn.innerHTML = '<span id="refreshIcon">🔄</span> Auto-refresh: OFF';
-                btn.classList.remove('auto-refresh-active');
-                document.getElementById('lastUpdate').style.display = 'none';
+                autoRefreshInterval = null; // Reset the interval ID.
+                autoRefreshButton.innerHTML = '<span id="refreshIcon">🔄</span> Auto-refresh: OFF';
+                autoRefreshButton.classList.remove('auto-refresh-active');
+                lastUpdateDisplay.style.display = 'none'; // Hide last update time.
             } else {
-                // Start auto-refresh
+                // If auto-refresh is inactive, start it.
                 if (!currentRepo) {
-                    showError('Please load a blog first');
+                    showError('Please load a blog first before enabling auto-refresh.');
                     return;
                 }
                 
+                // Set up the interval to call checkForUpdates periodically.
                 autoRefreshInterval = setInterval(checkForUpdates, AUTO_REFRESH_INTERVAL);
-                btn.innerHTML = '<span id="refreshIcon">🔄</span> Auto-refresh: ON';
-                btn.classList.add('auto-refresh-active');
-                document.getElementById('lastUpdate').style.display = 'block';
-                updateLastUpdateTime();
+                autoRefreshButton.innerHTML = '<span id="refreshIcon">🔄</span> Auto-refresh: ON';
+                autoRefreshButton.classList.add('auto-refresh-active');
+                lastUpdateDisplay.style.display = 'block'; // Show last update time.
+                updateLastUpdateTime(); // Update time immediately.
                 
-                // Check immediately
-                checkForUpdates();
+                checkForUpdates(); // Perform an immediate check when auto-refresh is enabled.
             }
         }
 
+        /**
+         * Checks the GitHub repository for new commits to detect potential new blog posts.
+         * Compares the latest commit SHA with the last known SHA.
+         */
         async function checkForUpdates() {
-            if (!currentRepo) return;
+            if (!currentRepo) return; // Do not proceed if no repository is loaded.
             
             try {
-                // Animate refresh icon
-                const icon = document.getElementById('refreshIcon');
-                if (icon) {
-                    icon.classList.add('refresh-icon-spin');
-                    setTimeout(() => icon.classList.remove('refresh-icon-spin'), 1000);
+                // Animate the refresh icon to provide visual feedback.
+                const iconElement = document.getElementById('refreshIcon');
+                if (iconElement) {
+                    iconElement.classList.add('refresh-icon-spin');
+                    // Remove the animation class after one cycle to reset for the next check.
+                    setTimeout(() => iconElement.classList.remove('refresh-icon-spin'), 1000);
                 }
                 
-                // Get latest commit SHA to detect changes
-                const commitsUrl = `https://api.github.com/repos/${currentRepo}/commits?per_page=1`;
-                const commitsResponse = await fetch(commitsUrl);
+                // Fetch the latest commit SHA for the current branch (default branch).
+                const commitsApiUrl = `https://api.github.com/repos/${currentRepo}/commits?per_page=1`;
+                const commitsResponse = await fetch(commitsApiUrl);
                 
                 if (commitsResponse.ok) {
-                    const commits = await commitsResponse.json();
-                    const latestSha = commits[0]?.sha;
+                    const commitsData = await commitsResponse.json();
+                    const latestCommitSha = commitsData[0]?.sha; // Get the SHA of the most recent commit.
                     
-                    if (latestSha && latestSha !== lastKnownSha && lastKnownSha !== '') {
-                        // New commits detected, check for new posts
-                        await loadBlogSilently();
-                        showNewPostNotification();
+                    // Check if a new commit exists and it's different from the last known one.
+                    // The `lastKnownSha !== ''` condition prevents notification on initial load.
+                    if (latestCommitSha && latestCommitSha !== lastKnownSha && lastKnownSha !== '') {
+                        // New commits detected, attempt to reload blog posts silently.
+                        const newPostsFound = await loadBlogSilently();
+                        if (newPostsFound) {
+                            showNewPostNotification(); // Display notification if new posts were actually loaded.
+                        }
                     }
                     
-                    lastKnownSha = latestSha;
-                    updateLastUpdateTime();
+                    lastKnownSha = latestCommitSha; // Update the last known SHA.
+                    updateLastUpdateTime(); // Update the displayed last update time.
+                } else {
+                    console.warn(`Failed to fetch commit history for ${currentRepo}: ${commitsResponse.status}`);
                 }
             } catch (error) {
-                console.warn('Auto-refresh check failed:', error);
+                console.error('An error occurred during auto-refresh update check:', error);
             }
         }
 
+        /**
+         * Silently loads blog data from the GitHub repository without showing loading indicators.
+         * Used by the auto-refresh mechanism to check for and render new content.
+         * @returns {boolean} True if new posts were detected and rendered, false otherwise.
+         */
         async function loadBlogSilently() {
             try {
-                const contentsUrl = `https://api.github.com/repos/${currentRepo}/contents`;
-                const contentsResponse = await fetch(contentsUrl);
-                
-                if (!contentsResponse.ok) return;
-
-                const contents = await contentsResponse.json();
-                const markdownFiles = contents.filter(file => 
-                    file.name.toLowerCase().endsWith('.md') && file.type === 'file'
-                );
-
-                const newBlogData = [];
-                for (const file of markdownFiles) {
-                    try {
-                        const fileResponse = await fetch(file.download_url);
-                        const fileContent = await fileResponse.text();
-                        
-                        const postData = extractPostData(fileContent, file.name);
-                        
-                        newBlogData.push({
-                            ...postData,
-                            filename: file.name,
-                            date: new Date().toLocaleDateString(),
-                            rawContent: fileContent
-                        });
-                    } catch (err) {
-                        console.warn(`Failed to load ${file.name}:`, err);
-                    }
-                }
-
-                // Check if there are new posts
-                if (newBlogData.length > blogData.length) {
-                    blogData = newBlogData.sort((a, b) => b.filename.localeCompare(a.filename));
-                    renderBlogPosts();
-                    return true;
-                }
-                
-                blogData = newBlogData.sort((a, b) => b.filename.localeCompare(a.filename));
-                
-            } catch (error) {
-                console.warn('Silent blog load failed:', error);
-            }
-            return false;
-        }
-
-        function showNewPostNotification() {
-            const notification = document.getElementById('newPostNotification');
-            notification.classList.add('show');
-            
-            // Auto-hide after 5 seconds
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 5000);
-        }
-
-        function dismissNotification() {
-            document.getElementById('newPostNotification').classList.remove('show');
-        }
-
-        function updateLastUpdateTime() {
-            const timeElement = document.getElementById('updateTime');
-            if (timeElement) {
-                timeElement.textContent = new Date().toLocaleTimeString();
-            }
-        }
-
-        function parseMarkdown(markdown) {
-            return markdown
-                // Headers
-                .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-                .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-                .replace(/^# (.*$)/gim, '<h1>$1</h1>')
-                // Bold
-                .replace(/\*\*(.*)\*\*/gim, '<strong>$1</strong>')
-                // Italic
-                .replace(/\*(.*)\*/gim, '<em>$1</em>')
-                // Code blocks
-                .replace(/```([^`]+)```/gim, '<pre><code>$1</code></pre>')
-                // Inline code
-                .replace(/`([^`]+)`/gim, '<code>$1</code>')
-                // Links
-                .replace(/\[([^\]]+)\]\(([^)]+)\)/gim, '<a href="$2" target="_blank" rel="noopener">$1</a>')
-                // Blockquotes
-                .replace(/^> (.*)$/gim, '<blockquote>$1</blockquote>')
-                // Line breaks
-                .replace(/\n/gim, '<br>');
-        }
-
-        // Extract title and content from markdown
-        function extractPostData(content, filename) {
-            const lines = content.split('\n');
-            let title = filename.replace('.md', '').replace(/[-_]/g, ' ');
-            let excerpt = '';
-            let bodyContent = content;
-
-            // Look for H1 title
-            const h1Match = content.match(/^# (.+)$/m);
-            if (h1Match) {
-                title = h1Match[1];
-                bodyContent = content.replace(/^# .+$/m, '').trim();
-            }
-
-            // Create excerpt (first 150 characters)
-            const plainText = bodyContent.replace(/[#*`>\[\]()]/g, '').trim();
-            excerpt = plainText.substring(0, 150) + (plainText.length > 150 ? '...' : '');
-
-            return { title, excerpt, content: bodyContent };
-        }
-
-        async function loadBlog() {
-            const repoInput = document.getElementById('repoInput').value.trim();
-            const loadingEl = document.getElementById('loading');
-            const errorEl = document.getElementById('error');
-            const blogPostsEl = document.getElementById('blogPosts');
-
-            if (!repoInput) {
-                showError('Please enter a GitHub repository (username/repository)');
-                return;
-            }
-
-            currentRepo = repoInput;
-
-            // Show loading
-            loadingEl.style.display = 'block';
-            errorEl.style.display = 'none';
-            blogPostsEl.innerHTML = '';
-
-            try {
-                // Get repository contents
-                const contentsUrl = `https://api.github.com/repos/${repoInput}/contents`;
-                const contentsResponse = await fetch(contentsUrl);
+                const contentsApiUrl = `https://api.github.com/repos/${currentRepo}/contents`;
+                const contentsResponse = await fetch(contentsApiUrl);
                 
                 if (!contentsResponse.ok) {
-                    if (contentsResponse.status === 404) {
-                        throw new Error('Repository not found. Please check the repository name.');
-                    } else if (contentsResponse.status === 403) {
-                        throw new Error('Repository is private or rate limit exceeded.');
-                    } else {
-                        throw new Error(`Failed to load repository: ${contentsResponse.status}`);
-                    }
+                    console.error(`Failed to fetch repository contents silently: ${contentsResponse.status}`);
+                    return false;
                 }
 
-                const contents = await contentsResponse.json();
-                
-                // Filter for markdown files
-                const markdownFiles = contents.filter(file => 
+                const directoryContents = await contentsResponse.json();
+                const markdownFiles = directoryContents.filter(file => 
                     file.name.toLowerCase().endsWith('.md') && file.type === 'file'
                 );
 
-                if (markdownFiles.length === 0) {
-                    throw new Error('No markdown files found in repository');
-                }
-
-                // Fetch content for each markdown file
-                blogData = [];
+                const newlyFetchedBlogData = [];
                 for (const file of markdownFiles) {
                     try {
                         const fileResponse = await fetch(file.download_url);
                         if (fileResponse.ok) {
                             const fileContent = await fileResponse.text();
+                            const postMetadata = extractPostData(fileContent, file.name);
                             
-                            const postData = extractPostData(fileContent, file.name);
-                            
-                            blogData.push({
-                                ...postData,
+                            newlyFetchedBlogData.push({
+                                ...postMetadata,
                                 filename: file.name,
-                                date: new Date().toLocaleDateString(),
+                                date: new Date().toLocaleDateString(), // Use current date, or extract from markdown if available.
                                 rawContent: fileContent
                             });
                         }
-                    } catch (err) {
-                        console.warn(`Failed to load ${file.name}:`, err);
+                    } catch (fileError) {
+                        console.warn(`Failed to retrieve content for file: ${file.name}. Error:`, fileError);
                     }
                 }
 
-                // Sort by filename (reverse order for newest first)
-                blogData.sort((a, b) => b.filename.localeCompare(a.filename));
-
-                renderBlogPosts();
+                // Determine if there are genuinely new posts or just updated existing ones.
+                const hasNewPosts = newlyFetchedBlogData.length > blogData.length;
                 
-                // Get initial commit SHA for auto-refresh
-                try {
-                    const commitsUrl = `https://api.github.com/repos/${repoInput}/commits?per_page=1`;
-                    const commitsResponse = await fetch(commitsUrl);
-                    if (commitsResponse.ok) {
-                        const commits = await commitsResponse.json();
-                        lastKnownSha = commits[0]?.sha || '';
-                    }
-                } catch (err) {
-                    console.warn('Could not get initial commit SHA:', err);
-                }
-
+                // Sort posts by filename in reverse to show newest first.
+                blogData = newlyFetchedBlogData.sort((postA, postB) => postB.filename.localeCompare(postA.filename));
+                
+                renderBlogPosts(); // Re-render the posts with the updated data.
+                return hasNewPosts; // Indicate if new posts were added.
+                
             } catch (error) {
-                showError(error.message);
-                currentRepo = '';
-            } finally {
-                loadingEl.style.display = 'none';
+                console.error('An error occurred during silent blog load:', error);
+                return false;
             }
         }
 
-        function renderBlogPosts() {
-            const blogPostsEl = document.getElementById('blogPosts');
+        /**
+         * Displays a temporary notification to the user about new posts.
+         */
+        function showNewPostNotification() {
+            const notificationElement = document.getElementById('newPostNotification');
+            notificationElement.classList.add('show'); // Apply 'show' class to trigger CSS animation.
             
-            if (blogData.length === 0) {
-                blogPostsEl.innerHTML = '<p class="loading">No blog posts found.</p>';
+            // Automatically hide the notification after a short delay.
+            setTimeout(() => {
+                notificationElement.classList.remove('show');
+            }, 5000); // Notification remains visible for 5 seconds.
+        }
+
+        /**
+         * Dismisses the new post notification immediately.
+         */
+        function dismissNotification() {
+            document.getElementById('newPostNotification').classList.remove('show');
+        }
+
+        /**
+         * Updates the displayed "Last updated" time in the header.
+         */
+        function updateLastUpdateTime() {
+            const timeSpanElement = document.getElementById('updateTime');
+            if (timeSpanElement) {
+                timeSpanElement.textContent = new Date().toLocaleTimeString(); // Formats to local time string.
+            }
+        }
+
+        /**
+         * Basic Markdown to HTML parser.
+         * Converts a subset of Markdown syntax into corresponding HTML tags.
+         * @param {string} markdownText - The Markdown string to parse.
+         * @returns {string} The HTML representation of the Markdown.
+         */
+        function parseMarkdown(markdownText) {
+            // This is a simplified Markdown parser. For production, consider a robust library.
+            let htmlContent = markdownText;
+
+            // Headers: Replace ###, ##, # with <h3>, <h2>, <h1> respectively.
+            htmlContent = htmlContent.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+            htmlContent = htmlContent.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+            htmlContent = htmlContent.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+
+            // Bold: **text** becomes <strong>text</strong>
+            htmlContent = htmlContent.replace(/\*\*(.*)\*\*/gim, '<strong>$1</strong>');
+            // Italic: *text* becomes <em>text</em>
+            htmlContent = htmlContent.replace(/\*(.*)\*/gim, '<em>$1</em>');
+
+            // Code blocks: ```code``` becomes <pre><code>code</code></pre>
+            // This regex is very basic and might not handle multi-line code blocks or specific languages well.
+            htmlContent = htmlContent.replace(/```([\s\S]+?)```/gim, '<pre><code>$1</code></pre>');
+            // Inline code: `code` becomes <code>code</code>
+            htmlContent = htmlContent.replace(/`([^`]+)`/gim, '<code>$1</code>');
+
+            // Links: [link text](url) becomes <a href="url" target="_blank" rel="noopener">link text</a>
+            htmlContent = htmlContent.replace(/\[([^\]]+)\]\(([^)]+)\)/gim, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+
+            // Blockquotes: > text becomes <blockquote>text</blockquote>
+            htmlContent = htmlContent.replace(/^> (.*)$/gim, '<blockquote>$1</blockquote>');
+
+            // Line breaks: Convert newline characters to <br> tags.
+            // This should be done carefully, typically after block-level elements are handled.
+            htmlContent = htmlContent.replace(/\n/gim, '<br>');
+
+            return htmlContent;
+        }
+
+        /**
+         * Extracts title, excerpt, and content body from a Markdown string.
+         * Attempts to find an H1 for the title, otherwise uses filename.
+         * Generates a short excerpt from the content.
+         * @param {string} rawMarkdownContent - The full Markdown content of the file.
+         * @param {string} filename - The original filename of the Markdown file.
+         * @returns {object} An object containing title, excerpt, and processed content.
+         */
+        function extractPostData(rawMarkdownContent, filename) {
+            let postTitle = filename.replace('.md', '').replace(/[-_]/g, ' '); // Default title from filename.
+            let postExcerpt = '';
+            let contentBody = rawMarkdownContent;
+
+            // Attempt to extract the title from the first H1 heading in the markdown.
+            const h1RegexMatch = rawMarkdownContent.match(/^# (.+)$/m);
+            if (h1RegexMatch && h1RegexMatch[1]) {
+                postTitle = h1RegexMatch[1];
+                // Remove the H1 line from the content body for full post display.
+                contentBody = rawMarkdownContent.replace(/^# .+$/m, '').trim();
+            }
+
+            // Generate an excerpt from the plain text of the content body.
+            // Remove markdown formatting to get clean text for the excerpt.
+            const plainTextForExcerpt = contentBody.replace(/[#*`>\-\[\]()]/g, '').trim();
+            postExcerpt = plainTextForExcerpt.substring(0, 150);
+            if (plainTextForExcerpt.length > 150) {
+                postExcerpt += '...'; // Add ellipsis if the excerpt is truncated.
+            }
+
+            return { title: postTitle, excerpt: postExcerpt, content: contentBody };
+        }
+
+        /**
+         * Initiates the process of loading blog posts from a specified GitHub repository.
+         * Displays loading states, handles errors, and renders the posts.
+         */
+        async function loadBlog() {
+            const repoInputField = document.getElementById('repoInput');
+            const repoIdentifier = repoInputField.value.trim(); // Get and trim the user input.
+            
+            const loadingElement = document.getElementById('loading');
+            const errorElement = document.getElementById('error');
+            const blogPostsContainer = document.getElementById('blogPosts');
+
+            if (!repoIdentifier) {
+                showError('Please provide a GitHub repository in the format "username/repository".');
                 return;
             }
 
-            blogPostsEl.innerHTML = blogData.map((post, index) => `
-                <article class="blog-post" onclick="openModal(${index})">
-                    <h2 class="post-title">${post.title}</h2>
-                    <div class="post-date">${post.date}</div>
-                    <p class="post-excerpt">${post.excerpt}</p>
-                </article>
-            `).join('');
+            currentRepo = repoIdentifier; // Set the global current repository.
+
+            // Display loading indicator and clear previous states.
+            loadingElement.style.display = 'block';
+            errorElement.style.display = 'none';
+            blogPostsContainer.innerHTML = ''; // Clear existing posts.
+
+            try {
+                // Fetch the contents of the root directory of the specified GitHub repository.
+                const contentsUrl = `https://api.github.com/repos/${repoIdentifier}/contents`;
+                const contentsFetchResponse = await fetch(contentsUrl);
+                
+                // Handle various HTTP response statuses.
+                if (!contentsFetchResponse.ok) {
+                    if (contentsFetchResponse.status === 404) {
+                        throw new Error('Repository not found. Please verify the username and repository name.');
+                    } else if (contentsFetchResponse.status === 403) {
+                        throw new Error('Access to repository denied. This might be a private repository, or GitHub API rate limit exceeded.');
+                    } else {
+                        throw new Error(`Failed to retrieve repository contents: HTTP status ${contentsFetchResponse.status}.`);
+                    }
+                }
+
+                const repositoryContents = await contentsFetchResponse.json();
+                
+                // Filter for files ending with '.md' (case-insensitive) and confirm they are files, not directories.
+                const detectedMarkdownFiles = repositoryContents.filter(fileEntry => 
+                    fileEntry.name.toLowerCase().endsWith('.md') && fileEntry.type === 'file'
+                );
+
+                if (detectedMarkdownFiles.length === 0) {
+                    throw new Error('No Markdown files (.md) were found in the root of the specified repository.');
+                }
+
+                // Initialize blogData array to store processed post information.
+                blogData = [];
+                // Iterate over each detected Markdown file to fetch and process its content.
+                for (const fileItem of detectedMarkdownFiles) {
+                    try {
+                        const markdownFileResponse = await fetch(fileItem.download_url);
+                        if (markdownFileResponse.ok) {
+                            const markdownContentText = await markdownFileResponse.text();
+                            
+                            // Extract structured data (title, excerpt, full content) from the Markdown.
+                            const postDetails = extractPostData(markdownContentText, fileItem.name);
+                            
+                            blogData.push({
+                                ...postDetails, // Spread the extracted properties.
+                                filename: fileItem.name,
+                                date: new Date().toLocaleDateString(), // Assign current date for demonstration; could be parsed from markdown if present.
+                                rawContent: markdownContentText // Keep original content for modal display.
+                            });
+                        } else {
+                            console.warn(`Failed to download content for ${fileItem.name}: HTTP status ${markdownFileResponse.status}`);
+                        }
+                    } catch (fileDownloadError) {
+                        console.error(`An error occurred while processing ${fileItem.name}:`, fileDownloadError);
+                    }
+                }
+
+                // Sort the blog posts by filename in reverse alphabetical order to display the newest first.
+                blogData.sort((postA, postB) => postB.filename.localeCompare(postA.filename));
+
+                renderBlogPosts(); // Render the fetched and sorted blog posts to the UI.
+                
+                // After successfully loading the blog, get the initial commit SHA for auto-refresh comparisons.
+                try {
+                    const commitsEndpointUrl = `https://api.github.com/repos/${repoIdentifier}/commits?per_page=1`;
+                    const commitsDataResponse = await fetch(commitsEndpointUrl);
+                    if (commitsDataResponse.ok) {
+                        const latestCommits = await commitsDataResponse.json();
+                        lastKnownSha = latestCommits[0]?.sha || ''; // Store the SHA if available.
+                    } else {
+                        console.warn(`Could not retrieve initial commit SHA: HTTP status ${commitsDataResponse.status}`);
+                    }
+                } catch (commitShaError) {
+                    console.error('An error occurred while fetching initial commit SHA:', commitShaError);
+                }
+
+            } catch (mainError) {
+                // Catch and display any errors encountered during the main blog loading process.
+                showError(mainError.message);
+                currentRepo = ''; // Reset currentRepo on error.
+            } finally {
+                loadingElement.style.display = 'none'; // Hide the loading indicator regardless of success or failure.
+            }
         }
 
-        function openModal(index) {
-            const post = blogData[index];
-            const modal = document.getElementById('modal');
-            const modalContent = document.getElementById('modalContent');
+        /**
+         * Renders the processed blog posts to the main content area.
+         */
+        function renderBlogPosts() {
+            const blogPostsDisplayArea = document.getElementById('blogPosts');
             
-            modalContent.innerHTML = `
+            if (blogData.length === 0) {
+                blogPostsDisplayArea.innerHTML = '<p class="loading">No blog posts found in this repository.</p>';
+                return;
+            }
+
+            // Generate HTML for each blog post using template literals.
+            blogPostsDisplayArea.innerHTML = blogData.map((postItem, index) => `
+                <article class="blog-post" onclick="openModal(${index})">
+                    <h2 class="post-title">${postItem.title}</h2>
+                    <div class="post-date">${postItem.date}</div>
+                    <p class="post-excerpt">${postItem.excerpt}</p>
+                </article>
+            `).join(''); // Join array of HTML strings into a single string.
+        }
+
+        /**
+         * Opens a modal window to display the full content of a selected blog post.
+         * @param {number} postIndex - The index of the blog post in the `blogData` array.
+         */
+        function openModal(postIndex) {
+            const selectedPost = blogData[postIndex]; // Retrieve the specific post data.
+            const modalOverlay = document.getElementById('modal');
+            const modalContentArea = document.getElementById('modalContent');
+            
+            // Populate the modal with the post's title, date, and parsed Markdown content.
+            modalContentArea.innerHTML = `
                 <div class="markdown-content">
-                    <h1>${post.title}</h1>
-                    <div class="post-date" style="margin-bottom: 2rem;">${post.date}</div>
-                    ${parseMarkdown(post.content)}
+                    <h1>${selectedPost.title}</h1>
+                    <div class="post-date" style="margin-bottom: 2rem;">${selectedPost.date}</div>
+                    ${parseMarkdown(selectedPost.content)}
                 </div>
             `;
             
-            modal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
+            modalOverlay.style.display = 'block'; // Make the modal visible.
+            document.body.style.overflow = 'hidden'; // Prevent scrolling of the main page while modal is open.
         }
 
+        /**
+         * Closes the modal window. Can be triggered by clicking the close button or outside the modal content.
+         * @param {Event} [event] - The click event object (optional).
+         */
         function closeModal(event) {
+            // Check if the click was on the modal overlay itself or the explicit close button.
             if (!event || event.target.id === 'modal' || event.target.className === 'modal-close') {
-                document.getElementById('modal').style.display = 'none';
-                document.body.style.overflow = 'auto';
+                document.getElementById('modal').style.display = 'none'; // Hide the modal.
+                document.body.style.overflow = 'auto'; // Re-enable scrolling on the main page.
             }
         }
 
+        /**
+         * Displays an error message to the user in a designated error area.
+         * @param {string} message - The error message to display.
+         */
         function showError(message) {
-            const errorEl = document.getElementById('error');
-            errorEl.textContent = message;
-            errorEl.style.display = 'block';
+            const errorDisplayElement = document.getElementById('error');
+            errorDisplayElement.textContent = message; // Set the error text.
+            errorDisplayElement.style.display = 'block'; // Make the error message visible.
         }
 
-        // Keyboard shortcuts
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
+        /*
+         * Event Listeners for Keyboard Shortcuts
+         */
+        document.addEventListener('keydown', function(event) {
+            // Close modal on 'Escape' key press.
+            if (event.key === 'Escape') {
                 closeModal();
             }
-            if (e.key === 'Enter' && e.target.id === 'repoInput') {
+            // Trigger blog load on 'Enter' key press when the repo input field is focused.
+            if (event.key === 'Enter' && event.target.id === 'repoInput') {
                 loadBlog();
             }
         });
 
-        // Initialize
-        loadTheme();
+        /*
+         * Initialization Functions
+         * Executed when the script loads or the page is ready.
+         */
+        loadTheme(); // Apply the theme preference immediately.
         
-        // Auto-load default repo on page load
+        // Auto-load the default repository specified by DEFAULT_REPO on page load.
+        // A small delay ensures that the DOM is fully parsed and elements are available.
         window.addEventListener('load', () => {
             if (DEFAULT_REPO && document.getElementById('repoInput').value) {
-                setTimeout(loadBlog, 100); // Small delay to ensure everything is loaded
+                setTimeout(loadBlog, 100); 
             }
         });
 
-        // Cleanup intervals on page unload
+        /*
+         * Cleanup on Page Unload
+         * Ensures that any active auto-refresh intervals are cleared to prevent memory leaks.
+         */
         window.addEventListener('beforeunload', () => {
             if (autoRefreshInterval) {
                 clearInterval(autoRefreshInterval);
