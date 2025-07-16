@@ -3,461 +3,370 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>.blog</title>
+    <title> Blog </title>
     <style>
         /*
          * Global Styles and CSS Reset
-         * Applies to all elements to ensure consistent rendering across browsers.
+         * Academic design inspired by 2010s journal websites
          */
         * {
             margin: 0;
             padding: 0;
-            box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height. */
+            box-sizing: border-box;
         }
 
         /*
-         * Body Styling
-         * Defines fundamental typography, color scheme, and background for the entire document.
-         * Includes a smooth transition for theme changes.
+         * Body Styling - Classic Academic Layout
+         * Serif fonts and traditional academic color scheme
          */
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6; /* Sets line height for readability. */
-            color: #333; /* Default text color for light mode. */
-            background: #fff; /* Default background color for light mode. */
-            transition: all 0.3s ease; /* Smooth transition for property changes (e.g., theme switch). */
+            font-family: 'Times New Roman', Times, serif;
+            line-height: 1.8;
+            color: #2c3e50;
+            background: #f8f9fa;
+            background-image: linear-gradient(45deg, #f8f9fa 25%, transparent 25%), 
+                              linear-gradient(-45deg, #f8f9fa 25%, transparent 25%), 
+                              linear-gradient(45deg, transparent 75%, #f8f9fa 75%), 
+                              linear-gradient(-45deg, transparent 75%, #f8f9fa 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
         }
 
         /*
-         * Dark Mode Styling for Body
-         * Overrides default body styles when the 'dark' class is applied, providing a dark theme.
-         */
-        body.dark {
-            color: #e4e4e7; /* Text color in dark mode. */
-            background: #0a0a0a; /* Background color in dark mode. */
-        }
-
-        /*
-         * Container Layout
-         * Centers content horizontally and provides internal padding for consistent spacing.
+         * Container Layout - Academic Paper Width
          */
         .container {
-            max-width: 800px; /* Maximum width to prevent content from stretching too wide on large screens. */
-            margin: 0 auto; /* Centers the container horizontally. */
-            padding: 2rem 1rem; /* Vertical and horizontal padding. */
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            background: #ffffff;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #3498db;
+            border-right: 4px solid #3498db;
+            min-height: 100vh;
         }
 
         /*
-         * Header Section Styling
-         * Defines the visual presentation of the page header, including text alignment and bottom border.
+         * Header Section - Academic Journal Style
          */
         header {
-            text-align: center; /* Centers header content. */
-            margin-bottom: 4rem; /* Space below the header. */
-            border-bottom: 1px solid #e5e5e5; /* Separator line. */
-            padding-bottom: 2rem; /* Padding before the separator. */
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid #34495e;
+            position: relative;
         }
 
-        /* Dark Mode Header Border */
-        body.dark header {
-            border-bottom-color: #27272a; /* Darker border in dark mode. */
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: #3498db;
         }
 
         /*
-         * Main Title (H1) Styling
-         * Defines the appearance of the primary heading on the page.
+         * Main Title - Academic Journal Style
          */
         h1 {
-            font-size: 2.5rem; /* Large font size for prominence. */
-            font-weight: 700; /* Bold font weight. */
-            margin-bottom: 0.5rem; /* Space below the title. */
-            letter-spacing: -0.025em; /* Slight letter spacing adjustment for aesthetic. */
+            font-size: 2.8rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            letter-spacing: 0.02em;
         }
 
         /*
-         * Subtitle Styling
-         * Styles for a secondary descriptive text, providing additional context.
+         * Subtitle - Academic Description
          */
         .subtitle {
-            color: #6b7280; /* Subdued text color. */
-            font-size: 1.125rem; /* Font size for subtitle. */
-            margin-bottom: 2rem; /* Space below the subtitle. */
-        }
-
-        /* Dark Mode Subtitle Color */
-        body.dark .subtitle {
-            color: #9ca3af; /* Lighter color in dark mode. */
+            color: #7f8c8d;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            font-style: italic;
+            font-weight: 300;
         }
 
         /*
-         * Controls Section Styling
-         * Arranges interactive elements (input, buttons) horizontally with spacing.
+         * Controls Section - Academic Form Style
          */
         .controls {
-            display: flex; /* Uses flexbox for alignment. */
-            justify-content: center; /* Centers items horizontally. */
-            align-items: center; /* Centers items vertically. */
-            gap: 1rem; /* Space between items. */
-            margin-bottom: 2rem; /* Space below the controls. */
-            flex-wrap: wrap; /* Allows items to wrap to the next line on smaller screens. */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            padding: 1.5rem;
+            background: #ecf0f1;
+            border-radius: 8px;
+            border: 1px solid #bdc3c7;
         }
 
         /*
-         * Last Update Information Display
-         * Styles for a small informational block indicating the last content update time.
+         * Last Update Information - Academic Citation Style
          */
         .last-update {
-            text-align: center; /* Centers the text. */
-            color: #6b7280; /* Subdued text color. */
-            font-size: 0.875rem; /* Smaller font size. */
-            margin-bottom: 2rem; /* Space below. */
-            padding: 0.5rem; /* Internal padding. */
-            background: #f8f9fa; /* Light background. */
-            border-radius: 0.5rem; /* Rounded corners. */
-            border-left: 4px solid #10b981; /* Left accent border. */
-        }
-
-        /* Dark Mode Last Update Background and Color */
-        body.dark .last-update {
-            color: #9ca3af; /* Lighter text in dark mode. */
-            background: #0f0f0f; /* Dark background. */
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: #ecf0f1;
+            border-radius: 6px;
+            border-left: 4px solid #3498db;
+            font-style: italic;
         }
 
         /*
          * Auto-Refresh Active State
-         * Visual indicator for when auto-refresh is enabled.
          */
         .auto-refresh-active {
-            background: #10b981 !important; /* Green background to highlight active state. */
-            color: white !important; /* White text for contrast. */
+            background: #27ae60 !important;
+            color: white !important;
+            border-color: #229954 !important;
         }
 
         /*
          * Refresh Icon Animation
-         * Defines a spinning animation for the refresh icon.
          */
         .refresh-icon-spin {
-            animation: spin 1s linear infinite; /* Applies the spin keyframe animation. */
+            animation: spin 1s linear infinite;
         }
 
-        /* Keyframe for Spin Animation */
         @keyframes spin {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
 
         /*
-         * New Post Notification
-         * Styles for a transient notification indicating new content is available.
+         * New Post Notification - Academic Alert Style
          */
         .new-post-notification {
-            position: fixed; /* Fixed position relative to the viewport. */
+            position: fixed;
             top: 5rem;
             right: 2rem;
-            background: #10b981; /* Green background. */
-            color: white; /* White text. */
-            padding: 1rem 1.5rem; /* Internal padding. */
-            border-radius: 0.5rem; /* Rounded corners. */
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* Subtle shadow. */
-            transform: translateX(400px); /* Initially off-screen to the right. */
-            transition: transform 0.3s ease; /* Smooth slide-in/out animation. */
-            z-index: 999; /* Ensures it appears above other content. */
-            cursor: pointer; /* Indicates it's clickable. */
+            background: #27ae60;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 999;
+            cursor: pointer;
+            font-size: 0.9rem;
+            border: 1px solid #229954;
         }
 
-        /* Show Notification State */
         .new-post-notification.show {
-            transform: translateX(0); /* Slides into view. */
+            transform: translateX(0);
         }
 
         /*
-         * GitHub Repository Input Field
-         * Styles for the text input where the user enters the GitHub repository.
+         * GitHub Repository Input Field - Academic Form Style
          */
         .github-input {
-            padding: 0.75rem 1rem; /* Internal padding. */
-            border: 1px solid #d1d5db; /* Light border. */
-            border-radius: 0.5rem; /* Rounded corners. */
-            font-size: 0.875rem; /* Font size. */
-            width: 300px; /* Fixed width. */
-            outline: none; /* Removes default focus outline. */
-            transition: all 0.2s ease; /* Smooth transition for focus states. */
+            padding: 0.8rem 1rem;
+            border: 2px solid #bdc3c7;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            width: 320px;
+            outline: none;
+            transition: all 0.3s ease;
+            font-family: 'Courier New', monospace;
+            background: #ffffff;
         }
 
-        /* Focus State for Input */
         .github-input:focus {
-            border-color: #000; /* Darker border on focus. */
-            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1); /* Subtle shadow on focus. */
-        }
-
-        /* Dark Mode Input Field */
-        body.dark .github-input {
-            background: #18181b; /* Dark background. */
-            border-color: #3f3f46; /* Darker border. */
-            color: #e4e4e7; /* Lighter text. */
-        }
-
-        /* Dark Mode Input Focus State */
-        body.dark .github-input:focus {
-            border-color: #fff; /* White border on focus. */
-            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1); /* Lighter shadow on focus. */
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
         }
 
         /*
-         * General Button Styling
-         * Applies to all interactive buttons for a consistent look.
+         * General Button Styling - Academic Style
          */
         .btn {
-            padding: 0.75rem 1.5rem; /* Internal padding. */
-            background: #000; /* Black background. */
-            color: #fff; /* White text. */
-            border: none; /* No border. */
-            border-radius: 0.5rem; /* Rounded corners. */
-            cursor: pointer; /* Indicates clickable element. */
-            font-size: 0.875rem; /* Font size. */
-            font-weight: 500; /* Medium font weight. */
-            transition: all 0.2s ease; /* Smooth hover effects. */
-            text-decoration: none; /* Removes underline for anchor-styled buttons. */
-            display: inline-block; /* Allows padding and vertical alignment. */
+            padding: 0.8rem 1.5rem;
+            background: #3498db;
+            color: #fff;
+            border: 2px solid #2980b9;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-family: inherit;
         }
 
-        /* Button Hover State */
         .btn:hover {
-            background: #374151; /* Darker background on hover. */
-            transform: translateY(-1px); /* Slight lift effect on hover. */
-        }
-
-        /* Dark Mode Button Styling */
-        body.dark .btn {
-            background: #fff; /* White background in dark mode. */
-            color: #000; /* Black text in dark mode. */
-        }
-
-        /* Dark Mode Button Hover State */
-        body.dark .btn:hover {
-            background: #e5e5e5; /* Lighter background on hover in dark mode. */
+            background: #2980b9;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         /*
-         * Theme Toggle Button
-         * Styles for the button that switches between light and dark themes.
-         */
-        .theme-toggle {
-            position: fixed; /* Fixed position relative to the viewport. */
-            top: 2rem;
-            right: 2rem;
-            background: none; /* Transparent background. */
-            border: 1px solid #d1d5db; /* Light border. */
-            border-radius: 50%; /* Makes it a circle. */
-            width: 44px;
-            height: 44px;
-            cursor: pointer; /* Indicates clickable element. */
-            display: flex; /* Uses flexbox to center icon. */
-            align-items: center; /* Centers vertically. */
-            justify-content: center; /* Centers horizontally. */
-            transition: all 0.2s ease; /* Smooth hover effects. */
-        }
-
-        /* Dark Mode Theme Toggle Border */
-        body.dark .theme-toggle {
-            border-color: #3f3f46; /* Darker border in dark mode. */
-        }
-
-        /* Theme Toggle Hover State */
-        .theme-toggle:hover {
-            transform: scale(1.1); /* Slightly enlarges on hover. */
-        }
-
-        /*
-         * Blog Posts Grid Layout
-         * Arranges individual blog posts in a grid with consistent spacing.
+         * Blog Posts Grid Layout - Academic Paper Style
          */
         .blog-posts {
-            display: grid; /* Uses CSS Grid for layout. */
-            gap: 2rem; /* Space between grid items (blog posts). */
+            display: grid;
+            gap: 2.5rem;
         }
 
         /*
-         * Individual Blog Post Card
-         * Styles for each blog post entry, including borders, padding, and hover effects.
+         * Individual Blog Post Card - Academic Paper Style
          */
         .blog-post {
-            border: 1px solid #e5e5e5; /* Light border. */
-            border-radius: 1rem; /* Rounded corners. */
-            padding: 2rem; /* Internal padding. */
-            transition: all 0.3s ease; /* Smooth hover effects. */
-            cursor: pointer; /* Indicates clickable element. */
+            border: 1px solid #d5d8dc;
+            border-radius: 8px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            background: #ffffff;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
         }
 
-        /* Blog Post Hover State */
+        .blog-post::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #3498db, #2980b9);
+            border-radius: 8px 8px 0 0;
+        }
+
         .blog-post:hover {
-            border-color: #d1d5db; /* Darker border on hover. */
-            transform: translateY(-2px); /* Slight lift effect on hover. */
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* Subtle shadow on hover. */
-        }
-
-        /* Dark Mode Blog Post Card */
-        body.dark .blog-post {
-            border-color: #27272a; /* Darker border in dark mode. */
-        }
-
-        /* Dark Mode Blog Post Hover State */
-        body.dark .blog-post:hover {
-            border-color: #3f3f46; /* Even darker border on hover. */
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); /* More pronounced shadow in dark mode. */
+            border-color: #3498db;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
         }
 
         /*
-         * Blog Post Title within Card
+         * Blog Post Title within Card - Academic Header Style
          */
         .post-title {
-            font-size: 1.5rem; /* Font size for post titles. */
-            font-weight: 600; /* Semi-bold. */
-            margin-bottom: 0.5rem; /* Space below title. */
-            color: #111827; /* Dark text color. */
-        }
-
-        /* Dark Mode Post Title */
-        body.dark .post-title {
-            color: #f9fafb; /* Light text color in dark mode. */
+            font-size: 1.6rem;
+            font-weight: 500;
+            margin-bottom: 0.8rem;
+            color: #2c3e50;
+            line-height: 1.4;
         }
 
         /*
-         * Blog Post Date
+         * Blog Post Date - Academic Citation Style
          */
         .post-date {
-            color: #6b7280; /* Subdued text color. */
-            font-size: 0.875rem; /* Smaller font size. */
-            margin-bottom: 1rem; /* Space below date. */
-        }
-
-        /* Dark Mode Post Date */
-        body.dark .post-date {
-            color: #9ca3af; /* Lighter text color in dark mode. */
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-bottom: 1.2rem;
+            font-style: italic;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
         /*
-         * Blog Post Excerpt
+         * Blog Post Excerpt - Academic Abstract Style
          */
         .post-excerpt {
-            color: #4b5563; /* Default text color. */
-            line-height: 1.6; /* Line height for readability. */
-        }
-
-        /* Dark Mode Post Excerpt */
-        body.dark .post-excerpt {
-            color: #d1d5db; /* Lighter text color in dark mode. */
+            color: #34495e;
+            line-height: 1.7;
+            font-size: 1.05rem;
+            text-align: justify;
         }
 
         /*
-         * Loading Message Styling
+         * Loading Message Styling - Academic Style
          */
         .loading {
-            text-align: center; /* Centers the text. */
-            color: #6b7280; /* Subdued text color. */
-            font-style: italic; /* Italic font. */
-            margin: 2rem 0; /* Vertical margin. */
-        }
-
-        /* Dark Mode Loading Message */
-        body.dark .loading {
-            color: #9ca3af; /* Lighter text color in dark mode. */
+            text-align: center;
+            color: #7f8c8d;
+            font-style: italic;
+            margin: 3rem 0;
+            font-size: 1.1rem;
         }
 
         /*
-         * Error Message Styling
+         * Error Message Styling - Academic Alert Style
          */
         .error {
-            background: #fef2f2; /* Light red background. */
-            border: 1px solid #fecaca; /* Red border. */
-            color: #dc2626; /* Dark red text. */
-            padding: 1rem; /* Internal padding. */
-            border-radius: 0.5rem; /* Rounded corners. */
-            margin: 1rem 0; /* Vertical margin. */
-        }
-
-        /* Dark Mode Error Message */
-        body.dark .error {
-            background: #1f1f23; /* Darker background. */
-            border-color: #ef4444; /* Brighter red border. */
-            color: #f87171; /* Lighter red text. */
+            background: #fadbd8;
+            border: 1px solid #e74c3c;
+            color: #c0392b;
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin: 1rem 0;
+            border-left: 4px solid #e74c3c;
+            font-size: 0.95rem;
         }
 
         /*
-         * Modal Overlay Styling
-         * Covers the entire screen when a blog post is opened.
+         * Modal Overlay Styling - Academic Paper View
          */
         .modal {
-            display: none; /* Hidden by default. */
-            position: fixed; /* Fixed position relative to the viewport. */
+            display: none;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8); /* Semi-transparent black overlay. */
-            z-index: 1000; /* Ensures it appears on top. */
-            padding: 2rem; /* Internal padding. */
-            overflow-y: auto; /* Allows vertical scrolling if content overflows. */
+            background: rgba(44, 62, 80, 0.9);
+            z-index: 1000;
+            padding: 2rem;
+            overflow-y: auto;
         }
 
         /*
-         * Modal Content Area
-         * The actual container for the displayed blog post content within the modal.
+         * Modal Content Area - Academic Paper Style
          */
         .modal-content {
-            max-width: 800px; /* Maximum width. */
-            margin: 0 auto; /* Centers horizontally. */
-            background: #fff; /* White background. */
-            border-radius: 1rem; /* Rounded corners. */
-            padding: 2rem; /* Internal padding. */
-            position: relative; /* Needed for positioning the close button. */
-        }
-
-        /* Dark Mode Modal Content */
-        body.dark .modal-content {
-            background: #0a0a0a; /* Dark background. */
-            border: 1px solid #27272a; /* Dark border. */
+            max-width: 900px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 3rem;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid #d5d8dc;
         }
 
         /*
-         * Modal Close Button Styling
+         * Modal Close Button Styling - Academic Style
          */
         .modal-close {
-            position: absolute; /* Absolute position within the modal content. */
-            top: 1rem;
-            right: 1rem;
-            background: none; /* Transparent background. */
-            border: none; /* No border. */
-            font-size: 1.5rem; /* Large font size for 'x'. */
-            cursor: pointer; /* Indicates clickable element. */
-            width: 40px;
-            height: 40px;
-            border-radius: 50%; /* Makes it a circle. */
-            display: flex; /* Uses flexbox to center 'x'. */
-            align-items: center; /* Centers vertically. */
-            justify-content: center; /* Centers horizontally. */
-            transition: all 0.2s ease; /* Smooth hover effects. */
-            color: #333; /* Default color for light mode. */
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: 1px solid #bdc3c7;
+            font-size: 1.2rem;
+            cursor: pointer;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            color: #7f8c8d;
         }
 
-        /* Dark Mode Modal Close Button */
-        body.dark .modal-close {
-            color: #e4e4e7; /* Lighter color in dark mode. */
-        }
-
-        /* Modal Close Button Hover State */
         .modal-close:hover {
-            background: #f3f4f6; /* Light background on hover. */
-        }
-
-        /* Dark Mode Modal Close Button Hover State */
-        body.dark .modal-close:hover {
-            background: #18181b; /* Darker background on hover. */
+            background: #ecf0f1;
+            border-color: #95a5a6;
+            color: #2c3e50;
         }
 
         /*
-         * Markdown Content Styling (within Modal and general)
-         * Provides basic styling for rendered markdown elements to improve readability.
+         * Markdown Content Styling - Academic Paper Style
          */
         .markdown-content h1,
         .markdown-content h2,
@@ -465,132 +374,159 @@
         .markdown-content h4,
         .markdown-content h5,
         .markdown-content h6 {
-            margin: 1.5rem 0 1rem 0; /* Vertical margins for headings. */
-            line-height: 1.3; /* Line height for headings. */
-            color: #111827; /* Default color for headers. */
+            margin: 2rem 0 1rem 0;
+            line-height: 1.3;
+            color: #2c3e50;
+            font-weight: 500;
         }
 
-        /* Dark Mode Markdown Headers */
-        body.dark .markdown-content h1,
-        body.dark .markdown-content h2,
-        body.dark .markdown-content h3,
-        body.dark .markdown-content h4,
-        body.dark .markdown-content h5,
-        body.dark .markdown-content h6 {
-            color: #f9fafb; /* Dark mode color for headers. */
+        .markdown-content h1 {
+            font-size: 2.2rem;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+        }
+
+        .markdown-content h2 {
+            font-size: 1.8rem;
+            border-bottom: 1px solid #bdc3c7;
+            padding-bottom: 0.3rem;
+        }
+
+        .markdown-content h3 {
+            font-size: 1.5rem;
         }
 
         .markdown-content p {
-            margin: 1rem 0; /* Vertical margins for paragraphs. */
-            color: #4b5563; /* Default color for paragraphs. */
-        }
-
-        /* Dark Mode Markdown Paragraphs */
-        body.dark .markdown-content p {
-            color: #d1d5db; /* Dark mode color for paragraphs. */
+            margin: 1.2rem 0;
+            color: #34495e;
+            text-align: justify;
+            font-size: 1.05rem;
         }
 
         .markdown-content ul,
         .markdown-content ol {
-            margin: 1rem 0; /* Vertical margins for lists. */
-            padding-left: 2rem; /* Indentation for list items. */
-            color: #4b5563; /* Default color for lists. */
+            margin: 1.2rem 0;
+            padding-left: 2.5rem;
+            color: #34495e;
         }
 
-        /* Dark Mode Markdown Lists */
-        body.dark .markdown-content ul,
-        body.dark .markdown-content ol {
-            color: #d1d5db; /* Dark mode color for lists. */
+        .markdown-content li {
+            margin: 0.5rem 0;
         }
 
         .markdown-content code {
-            background: #f3f4f6; /* Light background for inline code. */
-            padding: 0.125rem 0.25rem; /* Small padding. */
-            border-radius: 0.25rem; /* Slightly rounded corners. */
-            font-size: 0.875rem; /* Smaller font size. */
-            color: #e96900; /* Distinct color for inline code. */
-        }
-
-        /* Dark Mode Markdown Inline Code */
-        body.dark .markdown-content code {
-            background: #18181b; /* Dark background. */
-            color: #ff9800; /* Brighter color. */
+            background: #f8f9fa;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-size: 0.9rem;
+            color: #e74c3c;
+            font-family: 'Courier New', monospace;
+            border: 1px solid #ecf0f1;
         }
 
         .markdown-content pre {
-            background: #f8f9fa; /* Light background for code blocks. */
-            padding: 1rem; /* Internal padding. */
-            border-radius: 0.5rem; /* Rounded corners. */
-            overflow-x: auto; /* Enables horizontal scrolling for long lines. */
-            margin: 1rem 0; /* Vertical margins. */
-            color: #333; /* Default color for code blocks. */
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            color: #2c3e50;
+            border: 1px solid #ecf0f1;
+            border-left: 4px solid #3498db;
         }
 
-        /* Dark Mode Markdown Code Blocks */
-        body.dark .markdown-content pre {
-            background: #0f0f0f; /* Dark background. */
-            color: #e4e4e7; /* Lighter text. */
+        .markdown-content pre code {
+            background: none;
+            padding: 0;
+            border: none;
+            color: inherit;
         }
 
         .markdown-content blockquote {
-            border-left: 4px solid #e5e5e5; /* Left border to visually distinguish. */
-            padding-left: 1rem; /* Space between border and text. */
-            margin: 1rem 0; /* Vertical margins. */
-            color: #6b7280; /* Subdued text color. */
+            border-left: 4px solid #3498db;
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+            color: #7f8c8d;
+            font-style: italic;
+            background: #f8f9fa;
+            padding: 1rem 1.5rem;
+            border-radius: 0 6px 6px 0;
         }
 
-        /* Dark Mode Markdown Blockquotes */
-        body.dark .markdown-content blockquote {
-            border-left-color: #3f3f46; /* Darker border. */
-            color: #9ca3af; /* Lighter text. */
+        .markdown-content a {
+            color: #3498db;
+            text-decoration: none;
+            border-bottom: 1px dotted #3498db;
+            transition: all 0.2s ease;
+        }
+
+        .markdown-content a:hover {
+            color: #2980b9;
+            border-bottom-style: solid;
         }
 
         /*
-         * Responsive Design Adjustments
-         * Adapts layout for smaller screens (e.g., mobile devices).
+         * Responsive Design - Academic Layout
          */
-        @media (max-width: 640px) {
+        @media (max-width: 768px) {
             .container {
-                padding: 1rem; /* Reduced padding for smaller screens. */
+                padding: 1.5rem;
+                border-left: none;
+                border-right: none;
             }
 
             h1 {
-                font-size: 2rem; /* Smaller font size for header on mobile. */
+                font-size: 2.2rem;
             }
 
             .controls {
-                flex-direction: column; /* Stacks controls vertically. */
-                align-items: center; /* Centers stacked items. */
+                flex-direction: column;
+                align-items: center;
             }
 
             .github-input {
-                width: 100%; /* Full width for input. */
-                max-width: 300px; /* Limits maximum width even if 100%. */
-            }
-
-            .theme-toggle {
-                top: 1rem; /* Repositions toggle button. */
-                right: 1rem;
+                width: 100%;
+                max-width: 350px;
             }
 
             .modal {
-                padding: 1rem; /* Reduced modal padding. */
+                padding: 1rem;
             }
 
             .modal-content {
-                padding: 1rem; /* Reduced modal content padding. */
+                padding: 2rem;
+            }
+
+            .blog-post {
+                padding: 1.5rem;
+            }
+        }
+
+        /*
+         * Academic Print Styles
+         */
+        @media print {
+            body {
+                background: white;
+                color: black;
+            }
+            
+            .container {
+                box-shadow: none;
+                border: none;
+            }
+            
+            .controls, .new-post-notification {
+                display: none;
             }
         }
     </style>
 </head>
 <body>
-    <button class="theme-toggle" onclick="toggleTheme()">
-        <span id="theme-icon">🌙</span>
-    </button>
-
     <div class="container">
         <header>
-            <h1>.blog</h1>
+            <h1> Blog </h1>
+            <p class="subtitle"></p>
             
             <div class="controls">
                 <input 
@@ -600,7 +536,7 @@
                     placeholder="username/repository" 
                     value="devkvt23/b"
                 >
-                <button onclick="loadBlog()" class="btn">Load Blog</button>
+                <button onclick="loadBlog()" class="btn">Load Repository</button>
                 <button onclick="toggleAutoRefresh()" class="btn" id="autoRefreshBtn">
                     <span id="refreshIcon">🔄</span> Auto-refresh: OFF
                 </button>
@@ -613,13 +549,13 @@
 
         <main>
             <div id="loading" class="loading" style="display: none;">
-                Loading blog posts...
+                Loading...
             </div>
             
             <div id="error" class="error" style="display: none;"></div>
             
             <div id="newPostNotification" class="new-post-notification" onclick="dismissNotification()">
-                posts available! click to refresh.
+                Click to refresh.
             </div>
             
             <div id="blogPosts" class="blog-posts"></div>
@@ -634,47 +570,18 @@
     </div>
 
     <script>
-        // Global variables to manage blog state and intervals.
-        let blogData = []; // Stores an array of parsed blog post objects.
-        let currentRepo = ''; // Stores the currently loaded GitHub repository string (e.g., 'username/repo').
-        let autoRefreshInterval = null; // Holds the setInterval ID for auto-refresh, allowing it to be cleared.
-        let lastKnownSha = ''; // Stores the SHA of the last commit fetched from GitHub, used to detect new commits.
+        // Global variables to manage blog state and intervals
+        let blogData = [];
+        let currentRepo = '';
+        let autoRefreshInterval = null;
+        let lastKnownSha = '';
         
         // Configuration Constants
-        const AUTO_REFRESH_INTERVAL = 30000; // Interval for checking updates in milliseconds (30 seconds).
-        const DEFAULT_REPO = 'devkvt23/b'; // The default GitHub repository to load on initial page access.
+        const AUTO_REFRESH_INTERVAL = 30000; // 30 seconds
+        const DEFAULT_REPO = 'devkvt23/b';
         
         /**
-         * Toggles between light and dark themes.
-         * Manipulates the 'dark' class on the <body> element and updates the theme icon.
-         */
-        function toggleTheme() {
-            const bodyElement = document.body;
-            const themeIconElement = document.getElementById('theme-icon');
-            
-            bodyElement.classList.toggle('dark');
-            // Update the icon based on the current theme.
-            themeIconElement.textContent = bodyElement.classList.contains('dark') ? '☀️' : '🌙';
-            
-            // Store the current theme preference in a global window property for persistence across minor reloads.
-            window.currentTheme = bodyElement.classList.contains('dark') ? 'dark' : 'light';
-        }
-
-        /**
-         * Loads the user's last selected theme preference on page load.
-         * Applies the 'dark' class to the body if the preference is 'dark'.
-         */
-        function loadTheme() {
-            // Checks if a theme preference was previously set in the window's memory.
-            if (window.currentTheme === 'dark') {
-                document.body.classList.add('dark');
-                document.getElementById('theme-icon').textContent = '☀️'; // Set icon to sun for dark mode.
-            }
-        }
-
-        /**
-         * Toggles the auto-refresh functionality for the blog posts.
-         * Starts or stops the interval for checking updates and updates the button's text and style.
+         * Toggles the auto-refresh functionality for the blog posts
          */
         function toggleAutoRefresh() {
             const autoRefreshButton = document.getElementById('autoRefreshBtn');
@@ -682,78 +589,66 @@
             const lastUpdateDisplay = document.getElementById('lastUpdate');
             
             if (autoRefreshInterval) {
-                // If auto-refresh is active, stop it.
                 clearInterval(autoRefreshInterval);
-                autoRefreshInterval = null; // Reset the interval ID.
+                autoRefreshInterval = null;
                 autoRefreshButton.innerHTML = '<span id="refreshIcon">🔄</span> Auto-refresh: OFF';
                 autoRefreshButton.classList.remove('auto-refresh-active');
-                lastUpdateDisplay.style.display = 'none'; // Hide last update time.
+                lastUpdateDisplay.style.display = 'none';
             } else {
-                // If auto-refresh is inactive, start it.
                 if (!currentRepo) {
-                    showError('Please load a blog first before enabling auto-refresh.');
+                    showError('Please load a repository first before enabling auto-refresh.');
                     return;
                 }
                 
-                // Set up the interval to call checkForUpdates periodically.
                 autoRefreshInterval = setInterval(checkForUpdates, AUTO_REFRESH_INTERVAL);
                 autoRefreshButton.innerHTML = '<span id="refreshIcon">🔄</span> Auto-refresh: ON';
                 autoRefreshButton.classList.add('auto-refresh-active');
-                lastUpdateDisplay.style.display = 'block'; // Show last update time.
-                updateLastUpdateTime(); // Update time immediately.
+                lastUpdateDisplay.style.display = 'block';
+                updateLastUpdateTime();
                 
-                checkForUpdates(); // Perform an immediate check when auto-refresh is enabled.
+                checkForUpdates();
             }
         }
 
         /**
-         * Checks the GitHub repository for new commits to detect potential new blog posts.
-         * Compares the latest commit SHA with the last known SHA.
+         * Checks the GitHub repository for new commits
          */
         async function checkForUpdates() {
-            if (!currentRepo) return; // Do not proceed if no repository is loaded.
+            if (!currentRepo) return;
             
             try {
-                // Animate the refresh icon to provide visual feedback.
                 const iconElement = document.getElementById('refreshIcon');
                 if (iconElement) {
                     iconElement.classList.add('refresh-icon-spin');
-                    // Remove the animation class after one cycle to reset for the next check.
                     setTimeout(() => iconElement.classList.remove('refresh-icon-spin'), 1000);
                 }
                 
-                // Fetch the latest commit SHA for the current branch (default branch).
                 const commitsApiUrl = `https://api.github.com/repos/${currentRepo}/commits?per_page=1`;
                 const commitsResponse = await fetch(commitsApiUrl);
                 
                 if (commitsResponse.ok) {
                     const commitsData = await commitsResponse.json();
-                    const latestCommitSha = commitsData[0]?.sha; // Get the SHA of the most recent commit.
+                    const latestCommitSha = commitsData[0]?.sha;
                     
-                    // Check if a new commit exists and it's different from the last known one.
-                    // The `lastKnownSha !== ''` condition prevents notification on initial load.
                     if (latestCommitSha && latestCommitSha !== lastKnownSha && lastKnownSha !== '') {
-                        // New commits detected, attempt to reload blog posts silently.
                         const newPostsFound = await loadBlogSilently();
                         if (newPostsFound) {
-                            showNewPostNotification(); // Display notification if new posts were actually loaded.
+                            showNewPostNotification();
                         }
                     }
                     
-                    lastKnownSha = latestCommitSha; // Update the last known SHA.
-                    updateLastUpdateTime(); // Update the displayed last update time.
+                    lastKnownSha = latestCommitSha;
+                    updateLastUpdateTime();
                 } else {
                     console.warn(`Failed to fetch commit history for ${currentRepo}: ${commitsResponse.status}`);
                 }
             } catch (error) {
-                console.error('An error occurred during auto-refresh update check:', error);
+                console.error('Error during auto-refresh update check:', error);
             }
         }
 
         /**
-         * Silently loads blog data from the GitHub repository without showing loading indicators.
-         * Used by the auto-refresh mechanism to check for and render new content.
-         * @returns {boolean} True if new posts were detected and rendered, false otherwise.
+         * Silently loads blog data without showing loading indicators
          */
         async function loadBlogSilently() {
             try {
@@ -773,146 +668,154 @@
                 const newlyFetchedBlogData = [];
                 for (const file of markdownFiles) {
                     try {
-                        const fileResponse = await fetch(file.download_url);
-                        if (fileResponse.ok) {
+                        const [fileResponse, fileDetailsResponse] = await Promise.all([
+                            fetch(file.download_url),
+                            fetch(file.url)
+                        ]);
+                        
+                        if (fileResponse.ok && fileDetailsResponse.ok) {
                             const fileContent = await fileResponse.text();
+                            const fileDetails = await fileDetailsResponse.json();
                             const postMetadata = extractPostData(fileContent, file.name);
                             
                             newlyFetchedBlogData.push({
                                 ...postMetadata,
                                 filename: file.name,
-                                date: new Date().toLocaleDateString(), // Use current date, or extract from markdown if available.
+                                date: formatDate(fileDetails.committer?.date || new Date().toISOString()),
                                 rawContent: fileContent
                             });
                         }
                     } catch (fileError) {
-                        console.warn(`Failed to retrieve content for file: ${file.name}. Error:`, fileError);
+                        console.warn(`Failed to retrieve content for file: ${file.name}`, fileError);
                     }
                 }
 
-                // Determine if there are genuinely new posts or just updated existing ones.
                 const hasNewPosts = newlyFetchedBlogData.length > blogData.length;
                 
-                // Sort posts by filename in reverse to show newest first.
-                blogData = newlyFetchedBlogData.sort((postA, postB) => postB.filename.localeCompare(postA.filename));
+                blogData = newlyFetchedBlogData.sort((postA, postB) => 
+                    new Date(postB.date) - new Date(postA.date)
+                );
                 
-                renderBlogPosts(); // Re-render the posts with the updated data.
-                return hasNewPosts; // Indicate if new posts were added.
+                renderBlogPosts();
+                return hasNewPosts;
                 
             } catch (error) {
-                console.error('An error occurred during silent blog load:', error);
+                console.error('Error during silent blog load:', error);
                 return false;
             }
         }
 
         /**
-         * Displays a temporary notification to the user about new posts.
+         * Displays a notification about new posts
          */
         function showNewPostNotification() {
             const notificationElement = document.getElementById('newPostNotification');
-            notificationElement.classList.add('show'); // Apply 'show' class to trigger CSS animation.
+            notificationElement.classList.add('show');
             
-            // Automatically hide the notification after a short delay.
             setTimeout(() => {
                 notificationElement.classList.remove('show');
-            }, 5000); // Notification remains visible for 5 seconds.
+            }, 5000);
         }
 
         /**
-         * Dismisses the new post notification immediately.
+         * Dismisses the new post notification
          */
         function dismissNotification() {
             document.getElementById('newPostNotification').classList.remove('show');
         }
 
         /**
-         * Updates the displayed "Last updated" time in the header.
+         * Updates the displayed last update time
          */
         function updateLastUpdateTime() {
             const timeSpanElement = document.getElementById('updateTime');
             if (timeSpanElement) {
-                timeSpanElement.textContent = new Date().toLocaleTimeString(); // Formats to local time string.
+                timeSpanElement.textContent = new Date().toLocaleString();
             }
         }
 
         /**
-         * Basic Markdown to HTML parser.
-         * Converts a subset of Markdown syntax into corresponding HTML tags.
-         * @param {string} markdownText - The Markdown string to parse.
-         * @returns {string} The HTML representation of the Markdown.
+         * Formats a date string for display
+         */
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        /**
+         * Basic Markdown to HTML parser
          */
         function parseMarkdown(markdownText) {
-            // This is a simplified Markdown parser. For production, consider a robust library.
             let htmlContent = markdownText;
 
-            // Headers: Replace ###, ##, # with <h3>, <h2>, <h1> respectively.
+            // Headers
             htmlContent = htmlContent.replace(/^### (.*$)/gim, '<h3>$1</h3>');
             htmlContent = htmlContent.replace(/^## (.*$)/gim, '<h2>$1</h2>');
             htmlContent = htmlContent.replace(/^# (.*$)/gim, '<h1>$1</h1>');
 
-            // Bold: **text** becomes <strong>text</strong>
+            // Bold and italic
             htmlContent = htmlContent.replace(/\*\*(.*)\*\*/gim, '<strong>$1</strong>');
-            // Italic: *text* becomes <em>text</em>
             htmlContent = htmlContent.replace(/\*(.*)\*/gim, '<em>$1</em>');
 
-            // Code blocks: ```code``` becomes <pre><code>code</code></pre>
-            // This regex is very basic and might not handle multi-line code blocks or specific languages well.
+            // Code blocks and inline code
             htmlContent = htmlContent.replace(/```([\s\S]+?)```/gim, '<pre><code>$1</code></pre>');
-            // Inline code: `code` becomes <code>code</code>
             htmlContent = htmlContent.replace(/`([^`]+)`/gim, '<code>$1</code>');
 
-            // Links: [link text](url) becomes <a href="url" target="_blank" rel="noopener">link text</a>
+            // Links
             htmlContent = htmlContent.replace(/\[([^\]]+)\]\(([^)]+)\)/gim, '<a href="$2" target="_blank" rel="noopener">$1</a>');
 
-            // Blockquotes: > text becomes <blockquote>text</blockquote>
+            // Blockquotes
             htmlContent = htmlContent.replace(/^> (.*)$/gim, '<blockquote>$1</blockquote>');
 
-            // Line breaks: Convert newline characters to <br> tags.
-            // This should be done carefully, typically after block-level elements are handled.
+            // Lists
+            htmlContent = htmlContent.replace(/^\* (.*)$/gim, '<ul><li>$1</li></ul>');
+            htmlContent = htmlContent.replace(/^\d+\. (.*)$/gim, '<ol><li>$1</li></ol>');
+
+            // Line breaks
             htmlContent = htmlContent.replace(/\n/gim, '<br>');
+
+            // Clean up consecutive list tags
+            htmlContent = htmlContent.replace(/<\/ul><br><ul>/gim, '');
+            htmlContent = htmlContent.replace(/<\/ol><br><ol>/gim, '');
 
             return htmlContent;
         }
 
         /**
-         * Extracts title, excerpt, and content body from a Markdown string.
-         * Attempts to find an H1 for the title, otherwise uses filename.
-         * Generates a short excerpt from the content.
-         * @param {string} rawMarkdownContent - The full Markdown content of the file.
-         * @param {string} filename - The original filename of the Markdown file.
-         * @returns {object} An object containing title, excerpt, and processed content.
+         * Extracts post data from markdown content
          */
         function extractPostData(rawMarkdownContent, filename) {
-            let postTitle = filename.replace('.md', '').replace(/[-_]/g, ' '); // Default title from filename.
+            let postTitle = filename.replace('.md', '').replace(/[-_]/g, ' ');
             let postExcerpt = '';
             let contentBody = rawMarkdownContent;
 
-            // Attempt to extract the title from the first H1 heading in the markdown.
             const h1RegexMatch = rawMarkdownContent.match(/^# (.+)$/m);
             if (h1RegexMatch && h1RegexMatch[1]) {
                 postTitle = h1RegexMatch[1];
-                // Remove the H1 line from the content body for full post display.
                 contentBody = rawMarkdownContent.replace(/^# .+$/m, '').trim();
             }
 
-            // Generate an excerpt from the plain text of the content body.
-            // Remove markdown formatting to get clean text for the excerpt.
             const plainTextForExcerpt = contentBody.replace(/[#*`>\-\[\]()]/g, '').trim();
-            postExcerpt = plainTextForExcerpt.substring(0, 150);
-            if (plainTextForExcerpt.length > 150) {
-                postExcerpt += '...'; // Add ellipsis if the excerpt is truncated.
+            postExcerpt = plainTextForExcerpt.substring(0, 200);
+            if (plainTextForExcerpt.length > 200) {
+                postExcerpt += '...';
             }
 
             return { title: postTitle, excerpt: postExcerpt, content: contentBody };
         }
 
         /**
-         * Initiates the process of loading blog posts from a specified GitHub repository.
-         * Displays loading states, handles errors, and renders the posts.
+         * Loads blog posts from the specified GitHub repository
          */
         async function loadBlog() {
             const repoInputField = document.getElementById('repoInput');
-            const repoIdentifier = repoInputField.value.trim(); // Get and trim the user input.
+            const repoIdentifier = repoInputField.value.trim();
             
             const loadingElement = document.getElementById('loading');
             const errorElement = document.getElementById('error');
@@ -923,196 +826,98 @@
                 return;
             }
 
-            currentRepo = repoIdentifier; // Set the global current repository.
+            currentRepo = repoIdentifier;
 
-            // Display loading indicator and clear previous states.
             loadingElement.style.display = 'block';
             errorElement.style.display = 'none';
-            blogPostsContainer.innerHTML = ''; // Clear existing posts.
+            blogPostsContainer.innerHTML = '';
 
             try {
-                // Fetch the contents of the root directory of the specified GitHub repository.
                 const contentsUrl = `https://api.github.com/repos/${repoIdentifier}/contents`;
                 const contentsFetchResponse = await fetch(contentsUrl);
                 
-                // Handle various HTTP response statuses.
                 if (!contentsFetchResponse.ok) {
                     if (contentsFetchResponse.status === 404) {
                         throw new Error('Repository not found. Please verify the username and repository name.');
                     } else if (contentsFetchResponse.status === 403) {
-                        throw new Error('Access to repository denied. This might be a private repository, or GitHub API rate limit exceeded.');
+                        throw new Error('Access denied. This might be a private repository or API rate limit exceeded.');
                     } else {
-                        throw new Error(`Failed to retrieve repository contents: HTTP status ${contentsFetchResponse.status}.`);
+                        throw new Error(`Failed to retrieve repository contents: HTTP ${contentsFetchResponse.status}`);
                     }
                 }
 
                 const repositoryContents = await contentsFetchResponse.json();
                 
-                // Filter for files ending with '.md' (case-insensitive) and confirm they are files, not directories.
                 const detectedMarkdownFiles = repositoryContents.filter(fileEntry => 
                     fileEntry.name.toLowerCase().endsWith('.md') && fileEntry.type === 'file'
                 );
 
                 if (detectedMarkdownFiles.length === 0) {
-                    throw new Error('No Markdown files (.md) were found in the root of the specified repository.');
+                    throw new Error('No Markdown files (.md) found in the repository root.');
                 }
 
-                // Initialize blogData array to store processed post information.
                 blogData = [];
-                // Iterate over each detected Markdown file to fetch and process its content.
                 for (const fileItem of detectedMarkdownFiles) {
                     try {
-                        const markdownFileResponse = await fetch(fileItem.download_url);
-                        if (markdownFileResponse.ok) {
+                        const [markdownFileResponse, fileDetailsResponse] = await Promise.all([
+                            fetch(fileItem.download_url),
+                            fetch(fileItem.url)
+                        ]);
+                        
+                        if (markdownFileResponse.ok && fileDetailsResponse.ok) {
                             const markdownContentText = await markdownFileResponse.text();
-                            
-                            // Extract structured data (title, excerpt, full content) from the Markdown.
+                            const fileDetails = await fileDetailsResponse.json();
                             const postDetails = extractPostData(markdownContentText, fileItem.name);
                             
                             blogData.push({
-                                ...postDetails, // Spread the extracted properties.
+                                ...postDetails,
                                 filename: fileItem.name,
-                                date: new Date().toLocaleDateString(), // Assign current date for demonstration; could be parsed from markdown if present.
-                                rawContent: markdownContentText // Keep original content for modal display.
+                                date: formatDate(fileDetails.committer?.date || new Date().toISOString()),
+                                rawContent: markdownContentText
                             });
                         } else {
-                            console.warn(`Failed to download content for ${fileItem.name}: HTTP status ${markdownFileResponse.status}`);
+                            console.warn(`Failed to download content for ${fileItem.name}`);
                         }
                     } catch (fileDownloadError) {
-                        console.error(`An error occurred while processing ${fileItem.name}:`, fileDownloadError);
+                        console.error(`Error processing ${fileItem.name}:`, fileDownloadError);
                     }
                 }
 
-                // Sort the blog posts by filename in reverse alphabetical order to display the newest first.
-                blogData.sort((postA, postB) => postB.filename.localeCompare(postA.filename));
+                // Sort by date (newest first)
+                blogData.sort((postA, postB) => new Date(postB.date) - new Date(postA.date));
 
-                renderBlogPosts(); // Render the fetched and sorted blog posts to the UI.
+                renderBlogPosts();
                 
-                // After successfully loading the blog, get the initial commit SHA for auto-refresh comparisons.
+                // Get initial commit SHA for auto-refresh
                 try {
                     const commitsEndpointUrl = `https://api.github.com/repos/${repoIdentifier}/commits?per_page=1`;
                     const commitsDataResponse = await fetch(commitsEndpointUrl);
                     if (commitsDataResponse.ok) {
                         const latestCommits = await commitsDataResponse.json();
-                        lastKnownSha = latestCommits[0]?.sha || ''; // Store the SHA if available.
-                    } else {
-                        console.warn(`Could not retrieve initial commit SHA: HTTP status ${commitsDataResponse.status}`);
+                        lastKnownSha = latestCommits[0]?.sha || '';
                     }
                 } catch (commitShaError) {
-                    console.error('An error occurred while fetching initial commit SHA:', commitShaError);
+                    console.error('Error fetching initial commit SHA:', commitShaError);
                 }
 
             } catch (mainError) {
-                // Catch and display any errors encountered during the main blog loading process.
                 showError(mainError.message);
-                currentRepo = ''; // Reset currentRepo on error.
+                currentRepo = '';
             } finally {
-                loadingElement.style.display = 'none'; // Hide the loading indicator regardless of success or failure.
+                loadingElement.style.display = 'none';
             }
         }
 
         /**
-         * Renders the processed blog posts to the main content area.
+         * Renders the blog posts to the display area
          */
         function renderBlogPosts() {
             const blogPostsDisplayArea = document.getElementById('blogPosts');
             
             if (blogData.length === 0) {
-                blogPostsDisplayArea.innerHTML = '<p class="loading">No blog posts found in this repository.</p>';
+                blogPostsDisplayArea.innerHTML = '<p class="loading">No academic content found in this repository.</p>';
                 return;
             }
 
-            // Generate HTML for each blog post using template literals.
             blogPostsDisplayArea.innerHTML = blogData.map((postItem, index) => `
-                <article class="blog-post" onclick="openModal(${index})">
-                    <h2 class="post-title">${postItem.title}</h2>
-                    <div class="post-date">${postItem.date}</div>
-                    <p class="post-excerpt">${postItem.excerpt}</p>
-                </article>
-            `).join(''); // Join array of HTML strings into a single string.
-        }
-
-        /**
-         * Opens a modal window to display the full content of a selected blog post.
-         * @param {number} postIndex - The index of the blog post in the `blogData` array.
-         */
-        function openModal(postIndex) {
-            const selectedPost = blogData[postIndex]; // Retrieve the specific post data.
-            const modalOverlay = document.getElementById('modal');
-            const modalContentArea = document.getElementById('modalContent');
-            
-            // Populate the modal with the post's title, date, and parsed Markdown content.
-            modalContentArea.innerHTML = `
-                <div class="markdown-content">
-                    <h1>${selectedPost.title}</h1>
-                    <div class="post-date" style="margin-bottom: 2rem;">${selectedPost.date}</div>
-                    ${parseMarkdown(selectedPost.content)}
-                </div>
-            `;
-            
-            modalOverlay.style.display = 'block'; // Make the modal visible.
-            document.body.style.overflow = 'hidden'; // Prevent scrolling of the main page while modal is open.
-        }
-
-        /**
-         * Closes the modal window. Can be triggered by clicking the close button or outside the modal content.
-         * @param {Event} [event] - The click event object (optional).
-         */
-        function closeModal(event) {
-            // Check if the click was on the modal overlay itself or the explicit close button.
-            if (!event || event.target.id === 'modal' || event.target.className === 'modal-close') {
-                document.getElementById('modal').style.display = 'none'; // Hide the modal.
-                document.body.style.overflow = 'auto'; // Re-enable scrolling on the main page.
-            }
-        }
-
-        /**
-         * Displays an error message to the user in a designated error area.
-         * @param {string} message - The error message to display.
-         */
-        function showError(message) {
-            const errorDisplayElement = document.getElementById('error');
-            errorDisplayElement.textContent = message; // Set the error text.
-            errorDisplayElement.style.display = 'block'; // Make the error message visible.
-        }
-
-        /*
-         * Event Listeners for Keyboard Shortcuts
-         */
-        document.addEventListener('keydown', function(event) {
-            // Close modal on 'Escape' key press.
-            if (event.key === 'Escape') {
-                closeModal();
-            }
-            // Trigger blog load on 'Enter' key press when the repo input field is focused.
-            if (event.key === 'Enter' && event.target.id === 'repoInput') {
-                loadBlog();
-            }
-        });
-
-        /*
-         * Initialization Functions
-         * Executed when the script loads or the page is ready.
-         */
-        loadTheme(); // Apply the theme preference immediately.
-        
-        // Auto-load the default repository specified by DEFAULT_REPO on page load.
-        // A small delay ensures that the DOM is fully parsed and elements are available.
-        window.addEventListener('load', () => {
-            if (DEFAULT_REPO && document.getElementById('repoInput').value) {
-                setTimeout(loadBlog, 100); 
-            }
-        });
-
-        /*
-         * Cleanup on Page Unload
-         * Ensures that any active auto-refresh intervals are cleared to prevent memory leaks.
-         */
-        window.addEventListener('beforeunload', () => {
-            if (autoRefreshInterval) {
-                clearInterval(autoRefreshInterval);
-            }
-        });
-    </script>
-</body>
-</html>
+                <article class="
