@@ -1,923 +1,214 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Blog </title>
-    <style>
-        /*
-         * Global Styles and CSS Reset
-         * Academic design inspired by 2010s journal websites
-         */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modern Blog UI</title>
+<style>
+/* ================================
+   THEME VARIABLES
+================================ */
+:root {
+    --primary: #3498db;
+    --primary-dark: #2980b9;
+    --success: #27ae60;
+    --danger: #e74c3c;
+    --text-main: #2c3e50;
+    --text-muted: #7f8c8d;
+    --bg-light: rgba(255, 255, 255, 0.8);
+    --border-light: rgba(0, 0, 0, 0.08);
+    --radius: 12px;
+    --transition: 0.25s ease;
+}
 
-        /*
-         * Body Styling - Classic Academic Layout
-         * Serif fonts and traditional academic color scheme
-         */
-        body {
-            font-family: 'Times New Roman', Times, serif;
-            line-height: 1.8;
-            color: #2c3e50;
-            background: #f8f9fa;
-            background-image: linear-gradient(45deg, #f8f9fa 25%, transparent 25%), 
-                              linear-gradient(-45deg, #f8f9fa 25%, transparent 25%), 
-                              linear-gradient(45deg, transparent 75%, #f8f9fa 75%), 
-                              linear-gradient(-45deg, transparent 75%, #f8f9fa 75%);
-            background-size: 20px 20px;
-            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
-        }
+/* Dark mode ready */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text-main: #ecf0f1;
+        --text-muted: #bdc3c7;
+        --bg-light: rgba(25, 25, 25, 0.8);
+        --border-light: rgba(255, 255, 255, 0.08);
+    }
+}
 
-        /*
-         * Container Layout - Academic Paper Width
-         */
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 3rem 2rem;
-            background: #ffffff;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
-            border-left: 4px solid #3498db;
-            border-right: 4px solid #3498db;
-            min-height: 100vh;
-        }
+/* ================================
+   BASE STYLES
+================================ */
+body {
+    font-family: system-ui, sans-serif;
+    background: #f8f9fa;
+    color: var(--text-main);
+    line-height: 1.6;
+    padding: 1rem;
+}
 
-        /*
-         * Header Section - Academic Journal Style
-         */
-        header {
-            text-align: center;
-            margin-bottom: 3rem;
-            padding-bottom: 2rem;
-            border-bottom: 2px solid #34495e;
-            position: relative;
-        }
+/* Container */
+.container {
+    border-inline: 1px solid var(--border-light);
+    min-height: 100vh;
+    padding: 2rem;
+    backdrop-filter: blur(8px);
+}
 
-        header::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 2px;
-            background: #3498db;
-        }
+/* ================================
+   HEADER
+================================ */
+header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border-light);
+    position: relative;
+}
 
-        /*
-         * Main Title - Academic Journal Style
-         */
-        h1 {
-            font-size: 2.8rem;
-            font-weight: 400;
-            margin-bottom: 0.5rem;
-            color: #2c3e50;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-            letter-spacing: 0.02em;
-        }
+header::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 2px;
+    background: var(--primary);
+    border-radius: 2px;
+}
 
-        /*
-         * Subtitle - Academic Description
-         */
-        .subtitle {
-            color: #7f8c8d;
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            font-style: italic;
-            font-weight: 300;
-        }
+h1 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
 
-        /*
-         * Controls Section - Academic Form Style
-         */
-        .controls {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-            padding: 1.5rem;
-            background: #ecf0f1;
-            border-radius: 8px;
-            border: 1px solid #bdc3c7;
-        }
+.subtitle {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    font-style: italic;
+}
 
-        /*
-         * Last Update Information - Academic Citation Style
-         */
-        .last-update {
-            text-align: center;
-            color: #7f8c8d;
-            font-size: 0.9rem;
-            margin-bottom: 2rem;
-            padding: 1rem;
-            background: #ecf0f1;
-            border-radius: 6px;
-            border-left: 4px solid #3498db;
-            font-style: italic;
-        }
+/* ================================
+   CONTROLS
+================================ */
+.controls {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 1rem;
+    background: var(--bg-light);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius);
+    backdrop-filter: blur(6px);
+}
 
-        /*
-         * Auto-Refresh Active State
-         */
-        .auto-refresh-active {
-            background: #27ae60 !important;
-            color: white !important;
-            border-color: #229954 !important;
-        }
+/* Inputs */
+.github-input {
+    padding: 0.7rem 1rem;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius);
+    font-size: 0.95rem;
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
 
-        /*
-         * Refresh Icon Animation
-         */
-        .refresh-icon-spin {
-            animation: spin 1s linear infinite;
-        }
+.github-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.12);
+    outline: none;
+}
 
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
+/* Buttons */
+.btn {
+    padding: 0.7rem 1.4rem;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+}
 
-        /*
-         * New Post Notification - Academic Alert Style
-         */
-        .new-post-notification {
-            position: fixed;
-            top: 5rem;
-            right: 2rem;
-            background: #27ae60;
-            color: white;
-            padding: 1rem 1.5rem;
-            border-radius: 6px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            transform: translateX(400px);
-            transition: transform 0.3s ease;
-            z-index: 999;
-            cursor: pointer;
-            font-size: 0.9rem;
-            border: 1px solid #229954;
-        }
+.btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
 
-        .new-post-notification.show {
-            transform: translateX(0);
-        }
+/* ================================
+   BLOG POSTS
+================================ */
+.blog-post {
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius);
+    padding: 2rem;
+    background: var(--bg-light);
+    transition: transform var(--transition), box-shadow var(--transition);
+    margin-bottom: 1.5rem;
+}
 
-        /*
-         * GitHub Repository Input Field - Academic Form Style
-         */
-        .github-input {
-            padding: 0.8rem 1rem;
-            border: 2px solid #bdc3c7;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            width: 320px;
-            outline: none;
-            transition: all 0.3s ease;
-            font-family: 'Courier New', monospace;
-            background: #ffffff;
-        }
+.blog-post:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
 
-        .github-input:focus {
-            border-color: #3498db;
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
-        }
+.post-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
 
-        /*
-         * General Button Styling - Academic Style
-         */
-        .btn {
-            padding: 0.8rem 1.5rem;
-            background: #3498db;
-            color: #fff;
-            border: 2px solid #2980b9;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-            font-family: inherit;
-        }
+/* ================================
+   MODAL
+================================ */
+.modal {
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition);
+}
 
-        .btn:hover {
-            background: #2980b9;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
+.modal.show {
+    opacity: 1;
+    pointer-events: all;
+}
 
-        /*
-         * Blog Posts Grid Layout - Academic Paper Style
-         */
-        .blog-posts {
-            display: grid;
-            gap: 2.5rem;
-        }
-
-        /*
-         * Individual Blog Post Card - Academic Paper Style
-         */
-        .blog-post {
-            border: 1px solid #d5d8dc;
-            border-radius: 8px;
-            padding: 2.5rem;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            background: #ffffff;
-            position: relative;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        }
-
-        .blog-post::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #3498db, #2980b9);
-            border-radius: 8px 8px 0 0;
-        }
-
-        .blog-post:hover {
-            border-color: #3498db;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        }
-
-        /*
-         * Blog Post Title within Card - Academic Header Style
-         */
-        .post-title {
-            font-size: 1.6rem;
-            font-weight: 500;
-            margin-bottom: 0.8rem;
-            color: #2c3e50;
-            line-height: 1.4;
-        }
-
-        /*
-         * Blog Post Date - Academic Citation Style
-         */
-        .post-date {
-            color: #7f8c8d;
-            font-size: 0.9rem;
-            margin-bottom: 1.2rem;
-            font-style: italic;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        /*
-         * Blog Post Excerpt - Academic Abstract Style
-         */
-        .post-excerpt {
-            color: #34495e;
-            line-height: 1.7;
-            font-size: 1.05rem;
-            text-align: justify;
-        }
-
-        /*
-         * Loading Message Styling - Academic Style
-         */
-        .loading {
-            text-align: center;
-            color: #7f8c8d;
-            font-style: italic;
-            margin: 3rem 0;
-            font-size: 1.1rem;
-        }
-
-        /*
-         * Error Message Styling - Academic Alert Style
-         */
-        .error {
-            background: #fadbd8;
-            border: 1px solid #e74c3c;
-            color: #c0392b;
-            padding: 1.5rem;
-            border-radius: 6px;
-            margin: 1rem 0;
-            border-left: 4px solid #e74c3c;
-            font-size: 0.95rem;
-        }
-
-        /*
-         * Modal Overlay Styling - Academic Paper View
-         */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(44, 62, 80, 0.9);
-            z-index: 1000;
-            padding: 2rem;
-            overflow-y: auto;
-        }
-
-        /*
-         * Modal Content Area - Academic Paper Style
-         */
-        .modal-content {
-            max-width: 900px;
-            margin: 0 auto;
-            background: #ffffff;
-            border-radius: 8px;
-            padding: 3rem;
-            position: relative;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            border: 1px solid #d5d8dc;
-        }
-
-        /*
-         * Modal Close Button Styling - Academic Style
-         */
-        .modal-close {
-            position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
-            background: none;
-            border: 1px solid #bdc3c7;
-            font-size: 1.2rem;
-            cursor: pointer;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-            color: #7f8c8d;
-        }
-
-        .modal-close:hover {
-            background: #ecf0f1;
-            border-color: #95a5a6;
-            color: #2c3e50;
-        }
-
-        /*
-         * Markdown Content Styling - Academic Paper Style
-         */
-        .markdown-content h1,
-        .markdown-content h2,
-        .markdown-content h3,
-        .markdown-content h4,
-        .markdown-content h5,
-        .markdown-content h6 {
-            margin: 2rem 0 1rem 0;
-            line-height: 1.3;
-            color: #2c3e50;
-            font-weight: 500;
-        }
-
-        .markdown-content h1 {
-            font-size: 2.2rem;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 0.5rem;
-        }
-
-        .markdown-content h2 {
-            font-size: 1.8rem;
-            border-bottom: 1px solid #bdc3c7;
-            padding-bottom: 0.3rem;
-        }
-
-        .markdown-content h3 {
-            font-size: 1.5rem;
-        }
-
-        .markdown-content p {
-            margin: 1.2rem 0;
-            color: #34495e;
-            text-align: justify;
-            font-size: 1.05rem;
-        }
-
-        .markdown-content ul,
-        .markdown-content ol {
-            margin: 1.2rem 0;
-            padding-left: 2.5rem;
-            color: #34495e;
-        }
-
-        .markdown-content li {
-            margin: 0.5rem 0;
-        }
-
-        .markdown-content code {
-            background: #f8f9fa;
-            padding: 0.2rem 0.4rem;
-            border-radius: 3px;
-            font-size: 0.9rem;
-            color: #e74c3c;
-            font-family: 'Courier New', monospace;
-            border: 1px solid #ecf0f1;
-        }
-
-        .markdown-content pre {
-            background: #f8f9fa;
-            padding: 1.5rem;
-            border-radius: 6px;
-            overflow-x: auto;
-            margin: 1.5rem 0;
-            color: #2c3e50;
-            border: 1px solid #ecf0f1;
-            border-left: 4px solid #3498db;
-        }
-
-        .markdown-content pre code {
-            background: none;
-            padding: 0;
-            border: none;
-            color: inherit;
-        }
-
-        .markdown-content blockquote {
-            border-left: 4px solid #3498db;
-            padding-left: 1.5rem;
-            margin: 1.5rem 0;
-            color: #7f8c8d;
-            font-style: italic;
-            background: #f8f9fa;
-            padding: 1rem 1.5rem;
-            border-radius: 0 6px 6px 0;
-        }
-
-        .markdown-content a {
-            color: #3498db;
-            text-decoration: none;
-            border-bottom: 1px dotted #3498db;
-            transition: all 0.2s ease;
-        }
-
-        .markdown-content a:hover {
-            color: #2980b9;
-            border-bottom-style: solid;
-        }
-
-        /*
-         * Responsive Design - Academic Layout
-         */
-        @media (max-width: 768px) {
-            .container {
-                padding: 1.5rem;
-                border-left: none;
-                border-right: none;
-            }
-
-            h1 {
-                font-size: 2.2rem;
-            }
-
-            .controls {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .github-input {
-                width: 100%;
-                max-width: 350px;
-            }
-
-            .modal {
-                padding: 1rem;
-            }
-
-            .modal-content {
-                padding: 2rem;
-            }
-
-            .blog-post {
-                padding: 1.5rem;
-            }
-        }
-
-        /*
-         * Academic Print Styles
-         */
-        @media print {
-            body {
-                background: white;
-                color: black;
-            }
-            
-            .container {
-                box-shadow: none;
-                border: none;
-            }
-            
-            .controls, .new-post-notification {
-                display: none;
-            }
-        }
-    </style>
+.modal-content {
+    background: var(--bg-light);
+    border-radius: var(--radius);
+    padding: 2rem;
+    max-width: 800px;
+    margin: auto;
+    border: 1px solid var(--border-light);
+    backdrop-filter: blur(8px);
+}
+</style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1> Blog </h1>
-            <p class="subtitle"></p>
-            
-            <div class="controls">
-                <input 
-                    type="text" 
-                    id="repoInput" 
-                    class="github-input" 
-                    placeholder="username/repository" 
-                    value="devkvt23/b"
-                >
-                <button onclick="loadBlog()" class="btn">Load Repository</button>
-                <button onclick="toggleAutoRefresh()" class="btn" id="autoRefreshBtn">
-                    <span id="refreshIcon">🔄</span> Auto-refresh: OFF
-                </button>
-            </div>
-            
-            <div id="lastUpdate" class="last-update" style="display: none;">
-                Last updated: <span id="updateTime">Loading...</span>
-            </div>
-        </header>
 
-        <main>
-            <div id="loading" class="loading" style="display: none;">
-                Loading...
-            </div>
-            
-            <div id="error" class="error" style="display: none;"></div>
-            
-            <div id="newPostNotification" class="new-post-notification" onclick="dismissNotification()">
-                Click to refresh.
-            </div>
-            
-            <div id="blogPosts" class="blog-posts"></div>
-        </main>
-    </div>
+<div class="container">
+    <header>
+        <h1>My Modern Blog</h1>
+        <p class="subtitle">Thoughts, ideas, and updates</p>
+    </header>
 
-    <div id="modal" class="modal" onclick="closeModal(event)">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal()">&times;</button>
-            <div id="modalContent"></div>
-        </div>
-    </div>
+    <section class="controls">
+        <input type="text" class="github-input" placeholder="Search posts...">
+        <button class="btn">Search</button>
+        <button class="btn">Add Post</button>
+    </section>
 
-    <script>
-        // Global variables to manage blog state and intervals
-        let blogData = [];
-        let currentRepo = '';
-        let autoRefreshInterval = null;
-        let lastKnownSha = '';
-        
-        // Configuration Constants
-        const AUTO_REFRESH_INTERVAL = 30000; // 30 seconds
-        const DEFAULT_REPO = 'devkvt23/b';
-        
-        /**
-         * Toggles the auto-refresh functionality for the blog posts
-         */
-        function toggleAutoRefresh() {
-            const autoRefreshButton = document.getElementById('autoRefreshBtn');
-            const refreshIcon = document.getElementById('refreshIcon');
-            const lastUpdateDisplay = document.getElementById('lastUpdate');
-            
-            if (autoRefreshInterval) {
-                clearInterval(autoRefreshInterval);
-                autoRefreshInterval = null;
-                autoRefreshButton.innerHTML = '<span id="refreshIcon">🔄</span> Auto-refresh: OFF';
-                autoRefreshButton.classList.remove('auto-refresh-active');
-                lastUpdateDisplay.style.display = 'none';
-            } else {
-                if (!currentRepo) {
-                    showError('Please load a repository first before enabling auto-refresh.');
-                    return;
-                }
-                
-                autoRefreshInterval = setInterval(checkForUpdates, AUTO_REFRESH_INTERVAL);
-                autoRefreshButton.innerHTML = '<span id="refreshIcon">🔄</span> Auto-refresh: ON';
-                autoRefreshButton.classList.add('auto-refresh-active');
-                lastUpdateDisplay.style.display = 'block';
-                updateLastUpdateTime();
-                
-                checkForUpdates();
-            }
-        }
+    <section class="blog-posts">
+        <article class="blog-post">
+            <h2 class="post-title">First Blog Post</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed ligula a eros varius fermentum.</p>
+        </article>
 
-        /**
-         * Checks the GitHub repository for new commits
-         */
-        async function checkForUpdates() {
-            if (!currentRepo) return;
-            
-            try {
-                const iconElement = document.getElementById('refreshIcon');
-                if (iconElement) {
-                    iconElement.classList.add('refresh-icon-spin');
-                    setTimeout(() => iconElement.classList.remove('refresh-icon-spin'), 1000);
-                }
-                
-                const commitsApiUrl = `https://api.github.com/repos/${currentRepo}/commits?per_page=1`;
-                const commitsResponse = await fetch(commitsApiUrl);
-                
-                if (commitsResponse.ok) {
-                    const commitsData = await commitsResponse.json();
-                    const latestCommitSha = commitsData[0]?.sha;
-                    
-                    if (latestCommitSha && latestCommitSha !== lastKnownSha && lastKnownSha !== '') {
-                        const newPostsFound = await loadBlogSilently();
-                        if (newPostsFound) {
-                            showNewPostNotification();
-                        }
-                    }
-                    
-                    lastKnownSha = latestCommitSha;
-                    updateLastUpdateTime();
-                } else {
-                    console.warn(`Failed to fetch commit history for ${currentRepo}: ${commitsResponse.status}`);
-                }
-            } catch (error) {
-                console.error('Error during auto-refresh update check:', error);
-            }
-        }
+        <article class="blog-post">
+            <h2 class="post-title">Another Interesting Article</h2>
+            <p>Curabitur pretium lorem vitae tortor lacinia, sed aliquet risus luctus. Suspendisse potenti.</p>
+        </article>
+    </section>
+</div>
 
-        /**
-         * Silently loads blog data without showing loading indicators
-         */
-        async function loadBlogSilently() {
-            try {
-                const contentsApiUrl = `https://api.github.com/repos/${currentRepo}/contents`;
-                const contentsResponse = await fetch(contentsApiUrl);
-                
-                if (!contentsResponse.ok) {
-                    console.error(`Failed to fetch repository contents silently: ${contentsResponse.status}`);
-                    return false;
-                }
-
-                const directoryContents = await contentsResponse.json();
-                const markdownFiles = directoryContents.filter(file => 
-                    file.name.toLowerCase().endsWith('.md') && file.type === 'file'
-                );
-
-                const newlyFetchedBlogData = [];
-                for (const file of markdownFiles) {
-                    try {
-                        const [fileResponse, fileDetailsResponse] = await Promise.all([
-                            fetch(file.download_url),
-                            fetch(file.url)
-                        ]);
-                        
-                        if (fileResponse.ok && fileDetailsResponse.ok) {
-                            const fileContent = await fileResponse.text();
-                            const fileDetails = await fileDetailsResponse.json();
-                            const postMetadata = extractPostData(fileContent, file.name);
-                            
-                            newlyFetchedBlogData.push({
-                                ...postMetadata,
-                                filename: file.name,
-                                date: formatDate(fileDetails.committer?.date || new Date().toISOString()),
-                                rawContent: fileContent
-                            });
-                        }
-                    } catch (fileError) {
-                        console.warn(`Failed to retrieve content for file: ${file.name}`, fileError);
-                    }
-                }
-
-                const hasNewPosts = newlyFetchedBlogData.length > blogData.length;
-                
-                blogData = newlyFetchedBlogData.sort((postA, postB) => 
-                    new Date(postB.date) - new Date(postA.date)
-                );
-                
-                renderBlogPosts();
-                return hasNewPosts;
-                
-            } catch (error) {
-                console.error('Error during silent blog load:', error);
-                return false;
-            }
-        }
-
-        /**
-         * Displays a notification about new posts
-         */
-        function showNewPostNotification() {
-            const notificationElement = document.getElementById('newPostNotification');
-            notificationElement.classList.add('show');
-            
-            setTimeout(() => {
-                notificationElement.classList.remove('show');
-            }, 5000);
-        }
-
-        /**
-         * Dismisses the new post notification
-         */
-        function dismissNotification() {
-            document.getElementById('newPostNotification').classList.remove('show');
-        }
-
-        /**
-         * Updates the displayed last update time
-         */
-        function updateLastUpdateTime() {
-            const timeSpanElement = document.getElementById('updateTime');
-            if (timeSpanElement) {
-                timeSpanElement.textContent = new Date().toLocaleString();
-            }
-        }
-
-        /**
-         * Formats a date string for display
-         */
-        function formatDate(dateString) {
-            const date = new Date(dateString);
-            return date.toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-            });
-        }
-
-        /**
-         * Basic Markdown to HTML parser
-         */
-        function parseMarkdown(markdownText) {
-            let htmlContent = markdownText;
-
-            // Headers
-            htmlContent = htmlContent.replace(/^### (.*$)/gim, '<h3>$1</h3>');
-            htmlContent = htmlContent.replace(/^## (.*$)/gim, '<h2>$1</h2>');
-            htmlContent = htmlContent.replace(/^# (.*$)/gim, '<h1>$1</h1>');
-
-            // Bold and italic
-            htmlContent = htmlContent.replace(/\*\*(.*)\*\*/gim, '<strong>$1</strong>');
-            htmlContent = htmlContent.replace(/\*(.*)\*/gim, '<em>$1</em>');
-
-            // Code blocks and inline code
-            htmlContent = htmlContent.replace(/```([\s\S]+?)```/gim, '<pre><code>$1</code></pre>');
-            htmlContent = htmlContent.replace(/`([^`]+)`/gim, '<code>$1</code>');
-
-            // Links
-            htmlContent = htmlContent.replace(/\[([^\]]+)\]\(([^)]+)\)/gim, '<a href="$2" target="_blank" rel="noopener">$1</a>');
-
-            // Blockquotes
-            htmlContent = htmlContent.replace(/^> (.*)$/gim, '<blockquote>$1</blockquote>');
-
-            // Lists
-            htmlContent = htmlContent.replace(/^\* (.*)$/gim, '<ul><li>$1</li></ul>');
-            htmlContent = htmlContent.replace(/^\d+\. (.*)$/gim, '<ol><li>$1</li></ol>');
-
-            // Line breaks
-            htmlContent = htmlContent.replace(/\n/gim, '<br>');
-
-            // Clean up consecutive list tags
-            htmlContent = htmlContent.replace(/<\/ul><br><ul>/gim, '');
-            htmlContent = htmlContent.replace(/<\/ol><br><ol>/gim, '');
-
-            return htmlContent;
-        }
-
-        /**
-         * Extracts post data from markdown content
-         */
-        function extractPostData(rawMarkdownContent, filename) {
-            let postTitle = filename.replace('.md', '').replace(/[-_]/g, ' ');
-            let postExcerpt = '';
-            let contentBody = rawMarkdownContent;
-
-            const h1RegexMatch = rawMarkdownContent.match(/^# (.+)$/m);
-            if (h1RegexMatch && h1RegexMatch[1]) {
-                postTitle = h1RegexMatch[1];
-                contentBody = rawMarkdownContent.replace(/^# .+$/m, '').trim();
-            }
-
-            const plainTextForExcerpt = contentBody.replace(/[#*`>\-\[\]()]/g, '').trim();
-            postExcerpt = plainTextForExcerpt.substring(0, 200);
-            if (plainTextForExcerpt.length > 200) {
-                postExcerpt += '...';
-            }
-
-            return { title: postTitle, excerpt: postExcerpt, content: contentBody };
-        }
-
-        /**
-         * Loads blog posts from the specified GitHub repository
-         */
-        async function loadBlog() {
-            const repoInputField = document.getElementById('repoInput');
-            const repoIdentifier = repoInputField.value.trim();
-            
-            const loadingElement = document.getElementById('loading');
-            const errorElement = document.getElementById('error');
-            const blogPostsContainer = document.getElementById('blogPosts');
-
-            if (!repoIdentifier) {
-                showError('Please provide a GitHub repository in the format "username/repository".');
-                return;
-            }
-
-            currentRepo = repoIdentifier;
-
-            loadingElement.style.display = 'block';
-            errorElement.style.display = 'none';
-            blogPostsContainer.innerHTML = '';
-
-            try {
-                const contentsUrl = `https://api.github.com/repos/${repoIdentifier}/contents`;
-                const contentsFetchResponse = await fetch(contentsUrl);
-                
-                if (!contentsFetchResponse.ok) {
-                    if (contentsFetchResponse.status === 404) {
-                        throw new Error('Repository not found. Please verify the username and repository name.');
-                    } else if (contentsFetchResponse.status === 403) {
-                        throw new Error('Access denied. This might be a private repository or API rate limit exceeded.');
-                    } else {
-                        throw new Error(`Failed to retrieve repository contents: HTTP ${contentsFetchResponse.status}`);
-                    }
-                }
-
-                const repositoryContents = await contentsFetchResponse.json();
-                
-                const detectedMarkdownFiles = repositoryContents.filter(fileEntry => 
-                    fileEntry.name.toLowerCase().endsWith('.md') && fileEntry.type === 'file'
-                );
-
-                if (detectedMarkdownFiles.length === 0) {
-                    throw new Error('No Markdown files (.md) found in the repository root.');
-                }
-
-                blogData = [];
-                for (const fileItem of detectedMarkdownFiles) {
-                    try {
-                        const [markdownFileResponse, fileDetailsResponse] = await Promise.all([
-                            fetch(fileItem.download_url),
-                            fetch(fileItem.url)
-                        ]);
-                        
-                        if (markdownFileResponse.ok && fileDetailsResponse.ok) {
-                            const markdownContentText = await markdownFileResponse.text();
-                            const fileDetails = await fileDetailsResponse.json();
-                            const postDetails = extractPostData(markdownContentText, fileItem.name);
-                            
-                            blogData.push({
-                                ...postDetails,
-                                filename: fileItem.name,
-                                date: formatDate(fileDetails.committer?.date || new Date().toISOString()),
-                                rawContent: markdownContentText
-                            });
-                        } else {
-                            console.warn(`Failed to download content for ${fileItem.name}`);
-                        }
-                    } catch (fileDownloadError) {
-                        console.error(`Error processing ${fileItem.name}:`, fileDownloadError);
-                    }
-                }
-
-                // Sort by date (newest first)
-                blogData.sort((postA, postB) => new Date(postB.date) - new Date(postA.date));
-
-                renderBlogPosts();
-                
-                // Get initial commit SHA for auto-refresh
-                try {
-                    const commitsEndpointUrl = `https://api.github.com/repos/${repoIdentifier}/commits?per_page=1`;
-                    const commitsDataResponse = await fetch(commitsEndpointUrl);
-                    if (commitsDataResponse.ok) {
-                        const latestCommits = await commitsDataResponse.json();
-                        lastKnownSha = latestCommits[0]?.sha || '';
-                    }
-                } catch (commitShaError) {
-                    console.error('Error fetching initial commit SHA:', commitShaError);
-                }
-
-            } catch (mainError) {
-                showError(mainError.message);
-                currentRepo = '';
-            } finally {
-                loadingElement.style.display = 'none';
-            }
-        }
-
-        /**
-         * Renders the blog posts to the display area
-         */
-        function renderBlogPosts() {
-            const blogPostsDisplayArea = document.getElementById('blogPosts');
-            
-            if (blogData.length === 0) {
-                blogPostsDisplayArea.innerHTML = '<p class="loading">No academic content found in this repository.</p>';
-                return;
-            }
-
-            blogPostsDisplayArea.innerHTML = blogData.map((postItem, index) => `
-                <article class="
+</body>
+</html> 
